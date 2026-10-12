@@ -1,0 +1,1820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>UWR Personnel Register</title>
+<meta name="description" content="Personnel register of the Ghana National Fire Service, Upper West Regional Command.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#C42A1E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="UWR Register">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#EDEFF2; --surface:#FFFFFF; --surface-2:#F5F6F8; --ink:#141B24; --muted:#5A6573; --line:#D8DCE2;
+  --accent:#C42A1E; --accent-ink:#FFFFFF; --accent-soft:#FBE8E5; --gold:#A87A12;
+  --ok:#1E7A4C; --ok-soft:#E0F1E7; --warn:#9A5A00; --warn-soft:#FBEED7; --bad:#B42318; --bad-soft:#FCE5E2;
+  --info:#2459A8; --info-soft:#E3ECF9; --neutral-soft:#E9EBEF;
+  --shadow:0 1px 2px rgba(20,27,36,.06),0 8px 24px rgba(20,27,36,.08);
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#161C23; --surface-2:#1C242D; --ink:#E6EAEF; --muted:#95A1AF; --line:#2A333E;
+    --accent:#EF5A4C; --accent-ink:#1B0705; --accent-soft:#3A1A17; --gold:#D9A93B;
+    --ok:#52C68D; --ok-soft:#15301F; --warn:#F0A94A; --warn-soft:#352711; --bad:#F2766A; --bad-soft:#3A1916;
+    --info:#7FAAF0; --info-soft:#17263B; --neutral-soft:#232C36;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#161C23; --surface-2:#1C242D; --ink:#E6EAEF; --muted:#95A1AF; --line:#2A333E;
+  --accent:#EF5A4C; --accent-ink:#1B0705; --accent-soft:#3A1A17; --gold:#D9A93B;
+  --ok:#52C68D; --ok-soft:#15301F; --warn:#F0A94A; --warn-soft:#352711; --bad:#F2766A; --bad-soft:#3A1916;
+  --info:#7FAAF0; --info-soft:#17263B; --neutral-soft:#232C36;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:.01em;margin:0;text-wrap:balance;line-height:1.1}
+.mono{font-family:var(--mono);font-size:.92em}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* shell */
+.app{display:grid;grid-template-columns:236px 1fr;min-height:100%}
+.side{background:var(--surface);border-right:1px solid var(--line);padding:calc(20px + env(safe-area-inset-top,0px)) 14px 20px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:10px;align-items:center;padding:0 6px}
+.mark{width:40px;height:40px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:700 13px/1 var(--display);letter-spacing:.02em;flex:none}
+.brand b{display:block;font:600 17px/1.1 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.brand small{display:block;font-size:11.5px;color:var(--muted);line-height:1.3}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav button{all:unset;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;color:var(--muted);font-weight:500}
+.nav button:hover{background:var(--surface-2);color:var(--ink)}
+.nav button[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+.nav svg{width:19px;height:19px;flex:none}
+.nav .count{margin-left:auto;font-size:12px;font-variant-numeric:tabular-nums}
+.side .foot{margin-top:auto;font-size:12px;color:var(--muted);padding:0 6px;display:flex;flex-direction:column;gap:4px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:6px;vertical-align:1px}
+.dot.off{background:var(--warn)}
+
+.main{min-width:0;padding-inline:28px;padding-block:calc(24px + env(safe-area-inset-top,0px)) 48px;display:flex;flex-direction:column;gap:20px}
+.topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.eyebrow{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.topbar h1{font-size:34px;text-transform:uppercase;letter-spacing:.02em}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 14px;font-weight:500;cursor:pointer;display:inline-flex;gap:7px;align-items:center;min-height:38px;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn.danger{color:var(--bad);border-color:var(--bad-soft);background:var(--bad-soft)}
+.btn.ghost{background:transparent;border-color:transparent}
+.btn.sm{padding:4px 10px;min-height:30px;font-size:13px}
+.btn svg{width:17px;height:17px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+
+.banner{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:14px}
+.banner.warn{background:var(--warn-soft);border-color:transparent}
+.banner.info{background:var(--info-soft);border-color:transparent}
+.banner p{margin:0;flex:1 1 260px}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel h2{font-size:19px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.panel h2 small{font:500 12px var(--body);color:var(--muted);text-transform:none;letter-spacing:0}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.kpi .label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.kpi .value{font:600 40px/1.05 var(--display);font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:13px;color:var(--muted)}
+.kpi.accent .value{color:var(--accent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid2 > *{min-width:0}
+
+/* bars */
+.bars{display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:minmax(90px,38%) 1fr 36px;gap:10px;align-items:center;font-size:13.5px}
+.bar .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .track{height:10px;background:var(--surface-2);border-radius:5px;overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:5px}
+.bar.rank .fill{background:var(--gold)}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.empty{color:var(--muted);font-size:14px;padding:6px 0}
+
+.bloods{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.blood{border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:baseline}
+.blood b{font:600 18px var(--display)}
+.blood span{font-variant-numeric:tabular-nums;font-weight:600}
+
+.alerts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.alerts li{display:flex;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.alerts li:first-child{border-top:0}
+.alerts .grow{flex:1;min-width:0}
+.linkish{all:unset;cursor:pointer;font-weight:600}
+.linkish:hover{text-decoration:underline}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-size:12px;font-weight:600;white-space:nowrap;background:var(--neutral-soft);color:var(--muted)}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.info{background:var(--info-soft);color:var(--info)}
+.chip.warn{background:var(--warn-soft);color:var(--warn)}
+.chip.bad{background:var(--bad-soft);color:var(--bad)}
+.rank{font-family:var(--display);font-weight:600;letter-spacing:.03em;font-size:15px;color:var(--gold);white-space:nowrap}
+
+/* toolbar */
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.search{flex:1 1 260px;position:relative}
+.search input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-height:40px}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted)}
+select.f{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-height:40px;max-width:100%}
+.resultline{font-size:13px;color:var(--muted)}
+
+/* table */
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface-2)}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover{background:var(--surface-2)}
+.who{display:flex;gap:10px;align-items:center;min-width:0}
+.who b{font-weight:600}
+.av{width:34px;height:34px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font:600 13px var(--display);letter-spacing:.04em;color:var(--muted);flex:none;overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.av.lg{width:84px;height:84px;font-size:28px;border-radius:14px}
+
+.cards{display:none;flex-direction:column;gap:8px}
+.pcard{all:unset;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center}
+.pcard .av{grid-row:span 2}
+.pcard .l1{display:flex;gap:8px;align-items:baseline;min-width:0}
+.pcard .l1 b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard .l2{font-size:13px;color:var(--muted);grid-column:2 / 4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* sheet */
+.sheet{position:fixed;inset:0;z-index:50;display:flex;justify-content:flex-end}
+.sheet .back{position:absolute;inset:0;background:rgba(10,14,20,.45)}
+.sheet .pane{position:relative;background:var(--bg);width:min(640px,100%);height:100%;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.pane-head{display:flex;align-items:center;gap:10px;padding:14px 18px;padding-top:calc(14px + env(safe-area-inset-top,0px));background:var(--surface);border-bottom:1px solid var(--line)}
+.pane-head h2{font-size:20px;text-transform:uppercase;letter-spacing:.04em;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pane-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;-webkit-overflow-scrolling:touch}
+.pane-foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;padding:12px 18px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line)}
+.pane-foot .spacer{flex:1}
+
+.hero{display:flex;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.hero .n1{font:600 26px/1.1 var(--display);text-transform:uppercase;letter-spacing:.02em}
+.hero .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 18px;margin:0}
+.dl div{min-width:0}
+.dl dt{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.dl dd{margin:2px 0 0;overflow-wrap:anywhere}
+.dl .wide{grid-column:1 / -1}
+.meter{height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;margin-top:6px}
+.meter i{display:block;height:100%;background:var(--ok)}
+.hist{list-style:none;margin:0;padding:0}
+.hist li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px;flex-wrap:wrap}
+.hist li:first-child{border-top:0}
+
+/* forms */
+fieldset{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:14px 16px 16px;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px}
+legend{font:600 15px var(--display);text-transform:uppercase;letter-spacing:.06em;padding:0 6px;color:var(--accent)}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fld.wide{grid-column:1 / -1}
+.fld label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.fld label .req{color:var(--accent)}
+.fld input,.fld select,.fld textarea{width:100%;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);padding:8px 10px;min-height:40px;font-size:16px}
+.fld textarea{min-height:72px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--accent);outline:none;background:var(--surface)}
+.fld .hint{font-size:12px;color:var(--muted)}
+.err{color:var(--bad);font-size:13.5px;font-weight:500}
+.photo-row{display:flex;gap:14px;align-items:center;grid-column:1 / -1}
+
+/* lists (leave/transfer) */
+.rowlist{display:flex;flex-direction:column;gap:8px}
+.rec{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center}
+.rec .top{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;min-width:0}
+.rec .sub{font-size:13.5px;color:var(--muted);grid-column:1 / -1;display:flex;gap:6px 14px;flex-wrap:wrap}
+.rec .btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.route{font-weight:600}
+.route i{font-style:normal;color:var(--accent);padding:0 4px}
+
+.segs{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:3px;gap:2px;flex-wrap:wrap}
+.segs button{all:unset;cursor:pointer;padding:5px 11px;border-radius:6px;font-size:13.5px;font-weight:500;color:var(--muted)}
+.segs button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent)}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:14px;font-weight:500;z-index:80;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
+@media (min-width:861px){.toast{bottom:28px}}
+
+.tabbar{display:none}
+.settings-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.settings-grid textarea{width:100%;min-height:260px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);padding:10px;font:14px/1.6 var(--mono)}
+
+.gate{min-height:100vh;display:grid;place-items:center;padding-inline:16px;padding-block:32px;background:var(--bg)}
+.gate-card{width:min(420px,100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.gate-top{background:var(--accent);color:var(--accent-ink);padding:22px 24px;display:flex;gap:14px;align-items:center}
+.gate-top .mark{background:var(--accent-ink);color:var(--accent)}
+.gate-top b{font:600 22px/1.05 var(--display);text-transform:uppercase;letter-spacing:.03em;display:block}
+.gate-top small{opacity:.9;font-size:12.5px}
+.gate-body{padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.gate-body h2{font-size:22px;text-transform:uppercase;letter-spacing:.03em}
+.gate-body p{margin:0}
+.gate-body .btn.primary{justify-content:center;min-height:44px}
+.gate-foot{padding:0 24px 20px;font-size:12.5px;color:var(--muted)}
+.me{display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.me b{display:block;font-size:13.5px;line-height:1.25;color:var(--ink)}
+.me small{color:var(--muted);font-size:12px;display:block}
+.me-actions{display:flex;gap:6px;flex-wrap:wrap}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;grid-column:1 / -1}
+.checks label{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--ink);font-weight:400}
+.checks input{width:18px;height:18px;min-height:0;accent-color:var(--accent)}
+.roles{display:grid;gap:8px;grid-column:1 / -1}
+.rolepick{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;background:var(--surface-2)}
+.rolepick:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.rolepick input{margin-top:3px;accent-color:var(--accent)}
+.rolepick b{display:block;font-size:14px}.rolepick small{color:var(--muted);font-size:12.5px}
+.scope-note{font-size:13px;color:var(--muted)}
+.atts{display:flex;flex-wrap:wrap;gap:8px}
+.att{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:5px 8px;max-width:100%;color:var(--ink);text-decoration:none;font-size:13.5px}
+a.att:hover{border-color:var(--accent)}
+.att img{width:40px;height:40px;object-fit:cover;border-radius:5px;flex:none}
+.attic{width:40px;height:40px;border-radius:5px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font:700 12px var(--display);letter-spacing:.05em;flex:none}
+.attn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
+.att .btn.ghost{padding:2px;min-height:24px}
+.att .btn svg{width:15px;height:15px}
+.casebtn{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%;appearance:none}
+.casebtn:hover{border-color:var(--muted)}
+.casebtn.unread{border-left:3px solid var(--accent)}
+.udot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block;flex:none;align-self:center}
+.timeline{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.timeline li{position:relative}
+.timeline li::before{content:"";position:absolute;left:-24px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.memobody{white-space:pre-wrap;line-height:1.65;margin:16px 0;max-width:68ch;font-size:15.5px}
+.tbn{display:inline-block;min-width:16px;padding:0 4px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-size:10px;line-height:16px;text-align:center;font-weight:700}
+.morenav button{font-size:16px;padding:12px 10px}
+.pickhint:empty{display:none}
+.hero .chip,.rec .chip{white-space:normal}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.settings-grid{grid-template-columns:1fr}}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .tabbar[hidden]{display:none!important}
+  .side{display:none}
+  .main{padding-inline:16px;padding-block:calc(16px + env(safe-area-inset-top,0px)) calc(92px + env(safe-area-inset-bottom,0px))}
+  .topbar h1{font-size:28px}
+  .grid2{grid-template-columns:1fr}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+  .tabbar button{all:unset;flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;font-weight:500;color:var(--muted);cursor:pointer;padding:4px 0}
+  .tabbar button svg{width:21px;height:21px}
+  .tabbar button[aria-current="page"]{color:var(--accent)}
+  .tablewrap.people{display:none}
+  .cards{display:flex}
+  .mobile-hide{display:none}
+}
+@media (max-width:560px){
+  fieldset,.dl{grid-template-columns:1fr}
+  .kpi .value{font-size:34px}
+  .bloods{grid-template-columns:repeat(4,1fr);gap:6px}
+  .blood{flex-direction:column;align-items:flex-start;padding:6px 8px}
+  .hero{flex-direction:column;align-items:flex-start}
+  .toolbar select.f{flex:1 1 45%}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sheet .pane{animation:slidein .22s ease-out}
+  @keyframes slidein{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}
+}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate"><div class="gate-card"><div class="gate-body"><p class="muted">Connecting to the register…</p></div></div></div>
+<div class="app" id="app" hidden>
+  <aside class="side" aria-label="Main navigation">
+    <div class="brand"><div class="mark" aria-hidden="true">UWR</div><div><b>Personnel Register</b><small>GNFS · Upper West Regional Command</small></div></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="foot"><div id="meBox"></div><span id="syncState"><span class="dot off"></span>Connecting…</span></div>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Main navigation" hidden></nav>
+<div class="sheet" id="sheet" hidden><div class="back" data-close></div><div class="pane" role="dialog" aria-modal="true" id="pane"></div></div>
+<div class="toast" id="toast" hidden></div>
+<input type="file" id="photoInput" accept="image/*" hidden>
+<input type="file" id="attInput" accept="image/*,application/pdf" multiple hidden>
+<input type="file" id="jsonInput" accept=".json,application/json" hidden>
+<input type="file" id="csvInput" accept=".csv,text/csv" hidden>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+<script>
+(function(){
+"use strict";
+/* ---------- connection settings (filled in at deployment) ---------- */
+const CFG={url:"https://txksbymmjvklyqmutgwi.supabase.co",key:"sb_publishable_mFmpAPHfy_dBGTvFTBL0pw_3kqsKI-_",domain:"uwr-gnfs-hr.app"};
+let sb=null,chan=null;
+/* ---------- reference lists ---------- */
+const DEF = {
+  ranks:["CFO","DCFO","ACFO I","ACFO II","DO I","DO II","DO III","ADO I","ADO II","STN.O I","STN.O II","ASO","SO I","SO II","LFM/LFW","SFM/SFW","FM/FW","Recruit","Civilian Staff"],
+  stations:["Regional Headquarters, Wa","Wa Municipal Fire Station","Jirapa","Lawra","Nandom","Nadowli","Tumu (Sissala East)","Gwollu (Sissala West)","Wechiau (Wa West)","Funsi (Wa East)","Lambussie","Issa (DBI)"],
+  units:["Administration","Operations","Fire Safety & Inspection","Public Education","Training","Rescue","Accounts","Stores","Transport","PPME","Human Resource","Welfare"]
+};
+const STATUSES=["Active","On Leave","On Course","Seconded","Suspended","Transferred Out","Retired","Deceased"];
+const IN_STRENGTH=new Set(["Active","On Leave","On Course","Seconded","Suspended"]);
+const STATUS_TONE={"Active":"ok","On Leave":"info","On Course":"info","Seconded":"info","Suspended":"warn"};
+const BLOOD=["A+","A-","B+","B-","AB+","AB-","O+","O-"];
+const REGIONS=["Upper West","Upper East","North East","Northern","Savannah","Bono","Bono East","Ahafo","Ashanti","Eastern","Western","Western North","Central","Greater Accra","Volta","Oti"];
+const LEAVE_TYPES=["Annual","Casual","Sick","Maternity","Paternity","Study","Compassionate","Examination"];
+const LEAVE_STATUS=["Pending","Approved","Rejected","Cancelled"];
+const LEAVE_TONE={"Pending":"warn","Approved":"ok","Rejected":"bad"};
+const TR_TYPES=["Internal","Posted in","Posted out"];
+const TR_STATUS=["Pending","Effected","Cancelled"];
+const TR_TONE={"Pending":"warn","Effected":"ok"};
+const RETIRE_AGE=60;
+const KEY_FIELDS=["phone","dob","bloodGroup","nokName","nokPhone","ghanaCard","dateEnlisted","station"];
+const SESSION_HOURS=8;
+
+/* ---------- roles ---------- */
+const DISTRICT_CAN_CREATE=["dept","viewer","personnel"];
+const ROLES={
+  admin:{label:"Administrator",desc:"Full control: all records, user accounts, settings and the activity log."},
+  hr:{label:"HR Officer",desc:"All personnel across the region. Adds, edits and deletes records, approves leave, effects transfers, imports the nominal roll."},
+  district:{label:"District Fire Commander",desc:"Only the stations assigned below. Edits those officers, approves their leave and raises transfer requests."},
+  dept:{label:"Department / Unit Head",desc:"Only the units assigned below. Views those officers and submits leave requests for HR to approve."},
+  viewer:{label:"View only",desc:"Reads the whole register and exports it. Changes nothing."},
+  personnel:{label:"Personnel",desc:"Any officer. Sees only their own record, sends requests to their commander, reads memos and asks for corrections to their details."}
+};
+const ROLE_TONE={admin:"bad",hr:"info",district:"warn",dept:"ok",viewer:"",personnel:""};
+function covers(m,p){
+  if(!m||!p)return false;
+  if(m.role==="admin"||m.role==="hr")return true;
+  if(m.role==="personnel")return !!m.personnelId&&p.id===m.personnelId;
+  const st=m.stations||[],un=m.units||[];
+  if(m.role==="district"&&!st.length)return false;
+  if(m.role==="dept"&&!un.length)return false;
+  if(st.length&&!st.includes(p.station))return false;
+  if(un.length&&!un.includes(p.unit))return false;
+  return true;
+}
+function scopeOK(p){return covers(S.me,p);}
+const isAdmin=()=>!!(S.me&&S.me.role==="admin");
+const isScoped=m=>m&&m.role!=="admin"&&m.role!=="hr"&&m.role!=="personnel"&&((m.stations||[]).length||(m.units||[]).length||m.role==="district"||m.role==="dept");
+function can(act,p){
+  const r=S.me&&S.me.role;if(!r)return false;
+  if(act==="export")return true;
+  if(!S.canWrite)return false;
+  const inScope=p?scopeOK(p):true;
+  switch(act){
+    case "addPerson":return r==="admin"||r==="hr"||r==="district";
+    case "editPerson":return r==="admin"||r==="hr"||(r==="district"&&inScope);
+    case "deletePerson":case "import":case "effectTransfer":case "lists":return r==="admin"||r==="hr";
+    case "recordLeave":return r!=="viewer"&&inScope;
+    case "approveLeave":return r==="admin"||r==="hr"||(r==="district"&&inScope);
+    case "recordTransfer":return r==="admin"||r==="hr"||(r==="district"&&inScope);
+    case "users":return r==="admin"||r==="district";
+    case "examples":case "audit":case "approvals":return r==="admin";
+    case "requests":return r!=="admin"&&r!=="viewer";
+  }
+  return false;
+}
+function manageable(u){if(!S.me||!u)return false;if(isAdmin())return true;return S.me.role==="district"&&u.manager===S.me.id;}
+function scopeLabel(m){
+  if(!m)return "";if(m.role==="admin"||m.role==="hr")return "Whole region";if(m.role==="personnel")return "Own record only";
+  const st=(m.stations||[]).join(", "),un=(m.units||[]).join(", ");
+  if(m.role==="district")return st||"No stations assigned";
+  if(m.role==="dept")return (un||"No units assigned")+(st?" at "+st:"");
+  return un?(un+(st?" at "+st:"")):(st||"Whole region");
+}
+const PFORM=[
+  {t:"Service record",f:[
+    ["serviceNo","Service number","text",{req:1}],["rank","Rank","sel:ranks",{req:1}],
+    ["station","Station","sel:stations"],["unit","Unit / department","list:units"],
+    ["appointment","Appointment","text",{ph:"e.g. Station Officer in charge"}],["status","Status","sel:STATUSES"],
+    ["dateEnlisted","Date enlisted","date"],["lastPromotion","Date of last promotion","date"]]},
+  {t:"Personal details",f:[
+    ["surname","Surname","text",{req:1}],["firstName","First name","text",{req:1}],
+    ["otherNames","Other names","text"],["gender","Gender","sel:GENDER"],
+    ["dob","Date of birth","date"],["maritalStatus","Marital status","sel:MARITAL"],
+    ["bloodGroup","Blood group","sel:BLOOD"],["ghanaCard","Ghana Card number","text",{ph:"GHA-XXXXXXXXX-X"}],
+    ["hometown","Hometown","text"],["regionOrigin","Region of origin","sel:REGIONS"]]},
+  {t:"Contact",f:[
+    ["phone","Phone","tel"],["altPhone","Alternative phone","tel"],
+    ["email","Email","email",{wide:1}],["address","Residential address / digital address","textarea",{wide:1}]]},
+  {t:"Next of kin",f:[
+    ["nokName","Name","text"],["nokRelation","Relationship","text"],["nokPhone","Phone","tel",{wide:1}]]},
+  {t:"Qualifications & notes",f:[
+    ["qualifications","Academic & professional qualifications","textarea",{wide:1}],
+    ["courses","Service courses attended","textarea",{wide:1}],
+    ["notes","Remarks","textarea",{wide:1}]]}
+];
+const OPTS={STATUSES,BLOOD,REGIONS,GENDER:["Male","Female"],MARITAL:["Single","Married","Divorced","Widowed"]};
+const CSV_COLS=["serviceNo","rank","surname","firstName","otherNames","gender","dob","dateEnlisted","lastPromotion","station","unit","appointment","status","phone","altPhone","email","ghanaCard","bloodGroup","maritalStatus","hometown","regionOrigin","address","nokName","nokRelation","nokPhone","qualifications","courses","notes"];
+
+/* ---------- state ---------- */
+const S={personnel:[],leave:[],transfers:[],requests:[],cases:[],memos:[],reads:{},att:{},users:[],usersLoaded:false,lists:{ranks:DEF.ranks,stations:DEF.stations,units:DEF.units},
+  view:"dashboard",f:{q:"",station:"",rank:"",status:"inStrength",gender:"",sort:"rank"},
+  lf:"Pending",tf:"All",af:"pending",cf:"mine",mf:"inbox",uf:"staff",gateMode:"login",sheet:null,db:null,assets:null,downloads:null,live:false,canWrite:true,err:"",
+  me:null,fails:0,lockUntil:0,localAudit:[],logQ:Promise.resolve(),booted:false};
+try{const v=localStorage.getItem("uwr.view");if(v)S.view=v;}catch(e){}
+const byId=id=>S.personnel.find(p=>p.id===id);
+const people=()=>S.personnel.filter(scopeOK);
+const leaveScoped=()=>S.leave.filter(l=>{const p=byId(l.personnelId);return p?scopeOK(p):S.me&&["admin","hr","viewer"].includes(S.me.role);});
+const trScoped=()=>S.transfers.filter(t=>{const p=byId(t.personnelId);return p?scopeOK(p):S.me&&["admin","hr","viewer"].includes(S.me.role);});
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const todayISO=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");};
+const parseD=s=>{if(!s)return null;const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(s);return m?new Date(+m[1],+m[2]-1,+m[3]):null;};
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtD=s=>{const d=parseD(s);return d?d.getDate()+" "+MON[d.getMonth()]+" "+d.getFullYear():"—";};
+const fmtT=iso=>{const d=new Date(iso);if(isNaN(d))return "—";return d.getDate()+" "+MON[d.getMonth()]+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");};
+const yearsSince=s=>{const d=parseD(s);if(!d)return null;const n=new Date();let y=n.getFullYear()-d.getFullYear();if(n.getMonth()<d.getMonth()||(n.getMonth()===d.getMonth()&&n.getDate()<d.getDate()))y--;return y;};
+const retireISO=dob=>{const d=parseD(dob);if(!d)return "";return (d.getFullYear()+RETIRE_AGE)+dob.slice(4);};
+const daysBetween=(a,b)=>{const x=parseD(a),y=parseD(b);if(!x||!y)return 0;return Math.round((y-x)/864e5)+1;};
+const fullName=p=>[p.surname?p.surname.toUpperCase():"",p.firstName,p.otherNames].filter(Boolean).join(" ");
+const shortName=p=>p?((p.firstName||"")+" "+(p.surname||"")).trim():"Unknown person";
+const initials=p=>(((p.firstName||"")[0]||"")+((p.surname||"")[0]||"")).toUpperCase()||"+";
+const rankIdx=r=>{const i=S.lists.ranks.indexOf(r);return i<0?999:i;};
+const chip=(t,tone)=>`<span class="chip ${tone||""}">${esc(t)}</span>`;
+const avatar=(p,cls="")=>`<span class="av ${cls}" aria-hidden="true">${p&&p.photoId?`<img data-path="${esc(p.photoId)}" alt="">`:esc(initials(p||{}))}</span>`;
+const completeness=p=>Math.round(100*KEY_FIELDS.filter(k=>p[k]).length/KEY_FIELDS.length);
+const newId=()=>(crypto.randomUUID?crypto.randomUUID():"r"+Date.now().toString(36)+Math.random().toString(36).slice(2,10));
+const sid=s=>String(s||"").trim().replace(/[^A-Za-z0-9_\-~:@+]/g,"_").slice(0,120);
+const uname=s=>String(s||"").trim().toLowerCase().replace(/[^a-z0-9._-]/g,"");
+const pLabel=p=>p?(p.rank?p.rank+" ":"")+shortName(p)+(p.serviceNo?" ("+p.serviceNo+")":""):"a removed record";
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>t.hidden=true,2800);}
+function onLeaveToday(pid){const t=todayISO();return S.leave.some(l=>l.personnelId===pid&&l.status==="Approved"&&l.start<=t&&l.end>=t);}
+
+/* ---------- passwords ---------- */
+const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+const newSalt=()=>{const a=new Uint8Array(16);crypto.getRandomValues(a);return hex(a);};
+async function hashPw(pw,salt){
+  const enc=new TextEncoder();
+  const key=await crypto.subtle.importKey("raw",enc.encode(pw),"PBKDF2",false,["deriveBits"]);
+  const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(salt),iterations:150000,hash:"SHA-256"},key,256);
+  return hex(bits);
+}
+function pwProblem(pw){if(pw.length<8)return "Use at least 8 characters.";if(!/\d/.test(pw)||!/[A-Za-z]/.test(pw))return "Use both letters and numbers.";return "";}
+
+/* ---------- data layer (Supabase) ---------- */
+function chk(res){if(res&&res.error)throw res.error;return res?res.data:null;}
+async function fetchAll(table,cols){let out=[],from=0;for(;;){const d=chk(await sb.from(table).select(cols||"id,data").range(from,from+999));out=out.concat(d||[]);if(!d||d.length<1000)break;from+=1000;}return out;}
+async function load(t){
+  if(!sb||!S.me)return;
+  if(t==="profiles"){const r=await fetchAll("profiles","id,username,data");S.users=r.map(x=>({...x.data,id:x.id,username:x.username}));S.usersLoaded=true;return;}
+  if(t==="settings"){const r=await fetchAll("settings");const d=(r.find(x=>x.id==="lists")||{}).data;if(d)S.lists={ranks:d.ranks?.length?d.ranks:DEF.ranks,stations:d.stations?.length?d.stations:DEF.stations,units:d.units?.length?d.units:DEF.units};return;}
+  if(t==="memo_reads"){const r=await fetchAll("memo_reads","user_id,memo_id,read_at");const m={};r.forEach(x=>{(m[x.user_id]=m[x.user_id]||{})[x.memo_id]=x.read_at;});S.reads=m;return;}
+  if(["personnel","leave","transfers","requests","cases","memos"].includes(t)){const r=await fetchAll(t);S[t]=r.map(x=>({...x.data,id:x.id}));}
+}
+const ALL_TABLES=["profiles","settings","personnel","leave","transfers","requests","cases","memos","memo_reads"];
+async function loadAll(){await Promise.all(ALL_TABLES.map(t=>load(t).catch(e=>{console.warn(t,e);})));S.live=true;}
+const pendingLoads={};
+function queueLoad(t){clearTimeout(pendingLoads[t]);pendingLoads[t]=setTimeout(async()=>{try{await load(t);}catch(e){}if(t==="profiles")syncMe();refresh();},350);}
+function subscribe(){
+  if(chan)sb.removeChannel(chan);
+  chan=sb.channel("uwr-live").on("postgres_changes",{event:"*",schema:"public"},p=>queueLoad(p.table)).subscribe();
+}
+async function put(col,id,data){
+  const body=JSON.parse(JSON.stringify(data));delete body.id;body.updatedAt=new Date().toISOString();if(S.me)body.updatedBy=S.me.id;
+  const exists=(S[col]||[]).some(x=>x.id===id);
+  if(exists){const d=chk(await sb.from(col).update({data:body}).eq("id",id).select("id"));if(!d||!d.length)chk(await sb.from(col).insert({id,data:body}));}
+  else chk(await sb.from(col).insert({id,data:body}));
+  await load(col);refresh();
+}
+async function remove(col,id){chk(await sb.from(col).delete().eq("id",id));await load(col);refresh();}
+async function saveLists(lists){chk(await sb.from("settings").upsert({id:"lists",data:lists}));await load("settings");refresh();}
+function logAct(action,detail){
+  if(!S.me||!sb)return;
+  const e={u:S.me.id,n:S.me.name||S.me.username,r:S.me.role,a:action,d:detail||""};
+  S.logQ=S.logQ.then(()=>sb.from("audit").insert({data:e})).catch(()=>{});
+}
+async function putProfile(id,username,rec){const body=JSON.parse(JSON.stringify(rec));delete body.id;delete body.username;chk(await sb.from("profiles").upsert({id,username,data:body}));await load("profiles");}
+const stripDoc=o=>{if(!o)return null;const c=JSON.parse(JSON.stringify(o));delete c.id;return c;};
+async function applyOps(ops){
+  for(const o of ops){
+    if(o.col==="settings"){await saveLists(o.data);continue;}
+    if(o.col==="password"){chk(await sb.rpc("admin_set_password",{p_uid:o.id,p_pw:o.pw}));await load("profiles");continue;}
+    if(o.col==="profiles"){if(o.data==null){chk(await sb.rpc("admin_delete_user",{p_uid:o.id}));await load("profiles");}else await putProfile(o.id,o.username||(S.users.find(x=>x.id===o.id)||{}).username,o.data);continue;}
+    if(o.data==null)await remove(o.col,o.id);else await put(o.col,o.id,o.data);
+  }
+}
+/* Every change goes through commit(). The regional administrator's changes apply at once;
+   everyone else's become a request that waits in the administrator's Approvals queue. */
+async function commit(action,detail,ops){
+  if(isAdmin()){await applyOps(ops);logAct(action,detail);refresh();return "applied";}
+  const req={action,detail,ops:ops.map(o=>({...o,data:o.data==null?null:stripDoc(o.data),before:stripDoc(o.before)})),
+    by:S.me.id,byName:S.me.name,byRole:S.me.role,status:"pending",createdAt:new Date().toISOString()};
+  if(JSON.stringify(req).length>240000)throw {code:"too_big"};
+  await put("requests",newId(),req);
+  logAct("Sent for approval: "+action,detail);
+  return "pending";
+}
+const PENDING_MSG="Sent to the regional administrator for approval";
+const pendingOn=(col,id)=>S.requests.filter(r=>r.status==="pending"&&(r.ops||[]).some(o=>o.col===col&&o.id===id));
+function writeFail(e){
+  const c=(e&&e.code)||"",m=(e&&e.message)||String(e||"");
+  if(c==="too_big"){toast("That change is too large to send in one request. Split it into smaller parts.");return;}
+  if(c==="taken"){toast("That username is already taken.");return;}
+  if(c==="42501"||/row-level security|permission/i.test(m)){toast("You do not have permission to make that change.");return;}
+  if(/fetch|network|Failed to/i.test(m)){toast("No connection. Check your internet and try again.");return;}
+  toast("Could not save: "+m);
+}
+/* ---------- icons ---------- */
+const I={
+  dashboard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+  personnel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.3-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16.5 14.6c2.6-.3 4.4 1.3 5 4"/></svg>',
+  leave:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M8.5 15l2.3 2.2 4.7-4.7"/></svg>',
+  transfers:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h14l-3.5-3.5M20 17H6l3.5 3.5"/></svg>',
+  me:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="4" width="17" height="16" rx="2"/><circle cx="9" cy="10.5" r="2.3"/><path d="M5.8 16.5c.6-1.6 1.7-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 9.5h3.5M14.5 13h3.5"/></svg>',
+  cases:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5h16v11H4z"/><path d="M4 7l8 6 8-6"/></svg>',
+  memos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.5h9l4 4v13H6z"/><path d="M14.5 3.5V8h4.5M9 12h7M9 15.5h7M9 8.5h3"/></svg>',
+  more:'<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="18.5" cy="12" r="1.8"/></svg>',
+  clip:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.5 12 19.5a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.3 8.3a1.7 1.7 0 0 1-2.4-2.4l7.5-7.5"/></svg>',
+  approvals:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3.5" width="14" height="17.5" rx="2"/><path d="M9 3.5h6v3H9zM8.5 13l2.5 2.5 4.8-5"/></svg>',
+  requests:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12.5 20 4l-4 16-4.5-6.5L4 12.5z"/><path d="M11.5 13.5 20 4"/></svg>',
+  users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v5.5c0 4.6 3.3 8.4 8 9.5 4.7-1.1 8-4.9 8-9.5V6l-8-3z"/><circle cx="12" cy="10" r="2.5"/><path d="M8 16c.8-1.8 2.2-2.6 4-2.6s3.2.8 4 2.6"/></svg>',
+  settings:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>',
+  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',
+  close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>',
+  down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 4v12M7 11l5 5 5-5M4 20h16"/></svg>',
+  edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>'
+};
+function views(){
+  const r=S.me&&S.me.role;if(!r)return [["dashboard","Overview"]];
+  if(r==="personnel")return [["me","My record"],["cases","Requests"],["memos","Memos"],["settings","Account"]];
+  const v=[["dashboard","Overview"],["personnel","Personnel"]];
+  if(r!=="viewer")v.push(["cases","Requests"]);
+  v.push(["memos","Memos"],["leave","Leave"],["transfers","Transfers"]);
+  if(S.me.personnelId)v.push(["me","My record"]);
+  if(can("approvals"))v.push(["approvals","Approvals"]);
+  if(r!=="admin"&&r!=="viewer")v.push(["requests","My changes"]);
+  if(can("users"))v.push(["users","Users"]);
+  v.push(["settings",r==="admin"||r==="hr"?"Settings":"Account"]);
+  return v;
+}
+/* ---------- login gate ---------- */
+const gateShell=(inner,foot)=>`<div class="gate-card"><div class="gate-top"><div class="mark" aria-hidden="true">UWR</div><div><b>Personnel Register</b><small>Ghana National Fire Service · Upper West Regional Command</small></div></div><div class="gate-body">${inner}</div>${foot?`<div class="gate-foot">${foot}</div>`:""}</div>`;
+function showGate(){
+  $("#app").hidden=true;$("#tabbar").hidden=true;$("#gate").hidden=false;closeSheet(true);
+  const g=$("#gate");
+  if(S.cfgMissing){g.innerHTML=gateShell(`<h2>Not connected yet</h2><p class="muted">This copy of the register has not been connected to its database. The administrator must add the Supabase address and key.</p>`);return;}
+  if(S.setupNeeded===undefined){g.innerHTML=gateShell(`<p class="muted">${esc(S.gateMsg||"Connecting to the register…")}</p>`);return;}
+  if(!S.setupNeeded&&S.gateMode==="activate"){
+    g.innerHTML=gateShell(`<h2>Set up my account</h2><p class="muted" style="font-size:14px">For all officers of the Upper West Regional Command. Enter the details exactly as they appear on your personnel record, then choose a password.</p>
+    <form id="actForm" novalidate style="display:flex;flex-direction:column;gap:12px">
+      <div class="fld"><label for="ac_sn">Service number</label><input id="ac_sn" autocapitalize="characters" autocomplete="username"></div>
+      <div class="fld"><label for="ac_dob">Date of birth</label><input id="ac_dob" type="date"></div>
+      <div class="fld"><label for="ac_ph">Phone number on your record</label><input id="ac_ph" type="tel" inputmode="tel" placeholder="e.g. 024 123 4567"></div>
+      <div class="fld"><label for="ac_pw">Choose a password</label><input id="ac_pw" type="password" autocomplete="new-password"><span class="hint">At least 8 characters, letters and numbers.</span></div>
+      <div class="fld"><label for="ac_pw2">Confirm password</label><input id="ac_pw2" type="password" autocomplete="new-password"></div>
+      <p class="err" id="acErr" hidden></p>
+      <button class="btn primary" type="submit">${I.lock}Create my account</button></form>
+    <button class="btn" type="button" id="backBtn" style="justify-content:center">Back to sign in</button>`,"If your details do not match, ask HR to correct your record first.");
+    $("#actForm").addEventListener("submit",activate);$("#backBtn").addEventListener("click",()=>{S.gateMode="login";showGate();});return;
+  }
+  if(S.setupNeeded){
+    g.innerHTML=gateShell(`<h2>Set up the administrator</h2><p class="muted" style="font-size:14px">No user accounts exist yet. Create the administrator account. You will use it to create logins for HR, district commanders and departments.</p>
+    <form id="setupForm" novalidate style="display:flex;flex-direction:column;gap:12px">
+      <div class="fld"><label for="su_name">Full name and rank</label><input id="su_name" autocomplete="name" placeholder="e.g. ADO I Kokaa Ceaser"></div>
+      <div class="fld"><label for="su_user">Username</label><input id="su_user" autocomplete="username" autocapitalize="none" placeholder="e.g. admin.uwr"></div>
+      <div class="fld"><label for="su_pw">Password</label><input id="su_pw" type="password" autocomplete="new-password"><span class="hint">At least 8 characters, letters and numbers.</span></div>
+      <div class="fld"><label for="su_pw2">Confirm password</label><input id="su_pw2" type="password" autocomplete="new-password"></div>
+      <p class="err" id="suErr" hidden></p>
+      <button class="btn primary" type="submit">${I.lock}Create administrator</button></form>`,
+      "");
+    $("#setupForm").addEventListener("submit",setupAdmin);return;
+  }
+  g.innerHTML=gateShell(`<h2>Sign in</h2>
+    <form id="loginForm" novalidate style="display:flex;flex-direction:column;gap:12px">
+      <div class="fld"><label for="li_user">Username or service number</label><input id="li_user" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
+      <div class="fld"><label for="li_pw">Password</label><input id="li_pw" type="password" autocomplete="current-password"></div>
+      <p class="err" id="liErr" ${S.gateMsg?"":"hidden"}>${esc(S.gateMsg||"")}</p>
+      <button class="btn primary" type="submit">${I.lock}Sign in</button></form>
+    <button class="btn" type="button" id="actBtn" style="justify-content:center">First time? Set up my account</button>`,
+    "Forgotten your password? Ask the administrator to reset it. Sessions end after "+SESSION_HOURS+" hours or when you sign out.");
+  S.gateMsg="";
+  $("#loginForm").addEventListener("submit",doLogin);
+  $("#actBtn").addEventListener("click",()=>{S.gateMode="activate";showGate();});
+  setTimeout(()=>{const u=$("#li_user");if(u&&window.matchMedia("(min-width:861px)").matches)u.focus();},50);
+}
+const emailOf=u=>uname(u)+"@"+CFG.domain;
+function newClient(){return supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:"uwr-new-"+Math.random()}});}
+async function setupAdmin(e){
+  e.preventDefault();const err=$("#suErr");const n=$("#su_name").value.trim(),u=uname($("#su_user").value),p=$("#su_pw").value,p2=$("#su_pw2").value;
+  const fail=m=>{err.textContent=m;err.hidden=false;};
+  if(!n||!u)return fail("Enter your name and a username (letters, numbers, dots).");
+  const pp=pwProblem(p);if(pp)return fail(pp);if(p!==p2)return fail("The two passwords do not match.");
+  const btn=e.target.querySelector("button");btn.disabled=true;
+  try{
+    let r=await sb.auth.signUp({email:emailOf(u),password:p});
+    if(r.error&&/registered|exists/i.test(r.error.message))r=await sb.auth.signInWithPassword({email:emailOf(u),password:p});
+    if(r.error)throw r.error;
+    if(!r.data.session){btn.disabled=false;return fail("Supabase is asking for email confirmation. In Supabase go to Authentication → Sign In / Providers → Email and turn off “Confirm email”, then try again.");}
+    chk(await sb.rpc("claim_first_admin",{p_username:u,p_name:n}));
+    S.setupNeeded=false;try{localStorage.setItem("uwr.loginAt",String(Date.now()));}catch(x){}
+    if(await afterAuth())logAct("Created administrator account",u);
+  }catch(x){btn.disabled=false;fail("Could not create the account: "+(x.message||x));}
+}
+async function afterAuth(){
+  const {data:{user}}=await sb.auth.getUser();
+  if(!user){showGate();return false;}
+  const prof=chk(await sb.from("profiles").select("id,username,data").eq("id",user.id).maybeSingle());
+  if(!prof){await sb.auth.signOut();S.gateMsg="This login is waiting for the administrator's approval, or it has been removed.";showGate();return false;}
+  if(prof.data.active===false){await sb.auth.signOut();S.gateMsg="This account has been disabled. Contact the administrator.";showGate();return false;}
+  S.me={...prof.data,id:prof.id,username:prof.username};
+  $("#gate").innerHTML=gateShell(`<p class="muted">Loading the register…</p>`);
+  await loadAll();subscribe();
+  const fresh=S.users.find(x=>x.id===S.me.id);if(fresh)S.me={...fresh};
+  startSession(S.me);
+  sb.rpc("touch_me",{p_clear_must_change:false}).then(()=>{},()=>{});
+  return true;
+}
+async function doLogin(e){
+  e.preventDefault();const err=$("#liErr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  if(Date.now()<S.lockUntil)return fail(`Too many failed attempts. Try again in ${Math.ceil((S.lockUntil-Date.now())/1000)} seconds.`);
+  const u=uname($("#li_user").value),p=$("#li_pw").value;
+  if(!u||!p)return fail("Enter your username (or service number) and password.");
+  const btn=e.target.querySelector("button");btn.disabled=true;
+  const r=await sb.auth.signInWithPassword({email:emailOf(u),password:p});
+  btn.disabled=false;
+  if(r.error){S.fails++;if(S.fails>=5){S.lockUntil=Date.now()+60000;S.fails=0;}$("#li_pw").value="";return fail(/fetch|network/i.test(r.error.message)?"No connection. Check your internet and try again.":"Username or password is incorrect.");}
+  S.fails=0;try{localStorage.setItem("uwr.loginAt",String(Date.now()));}catch(x){}
+  if(await afterAuth())logAct("Signed in","");
+}
+async function activate(e){
+  e.preventDefault();const err=$("#acErr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  if(Date.now()<S.lockUntil)return fail(`Too many failed attempts. Try again in ${Math.ceil((S.lockUntil-Date.now())/1000)} seconds.`);
+  const snRaw=$("#ac_sn").value.trim(),dob=$("#ac_dob").value,ph=$("#ac_ph").value,pw=$("#ac_pw").value,pw2=$("#ac_pw2").value;
+  if(!snRaw||!dob||ph.replace(/\D/g,"").length<9)return fail("Fill in your service number, date of birth and full phone number.");
+  const pp=pwProblem(pw);if(pp)return fail(pp);if(pw!==pw2)return fail("The two passwords do not match.");
+  const btn=e.target.querySelector("button");btn.disabled=true;const done=m=>{btn.disabled=false;fail(m);};
+  const v=(await sb.rpc("verify_personnel",{p_sn:snRaw,p_dob:dob,p_phone:ph})).data;
+  if(v==="nomatch"){S.fails++;if(S.fails>=5){S.lockUntil=Date.now()+120000;S.fails=0;}return done("Those details do not match a personnel record. Check them, or ask HR to update your record.");}
+  if(v==="inactive")return done("Your record is not active. Contact HR.");
+  if(v==="exists")return done("An account already exists for this service number. Sign in with your service number, or ask the administrator to reset your password.");
+  if(v!=="ok")return done("Could not check your details. Check your connection and try again.");
+  const u=uname(snRaw);
+  let r=await sb.auth.signUp({email:emailOf(u),password:pw});
+  if(r.error&&/registered|exists/i.test(r.error.message))r=await sb.auth.signInWithPassword({email:emailOf(u),password:pw});
+  if(r.error)return done(/registered|exists|invalid/i.test(r.error.message)?"This service number already has a login with a different password. Ask the administrator to reset it.":"Could not create the account: "+r.error.message);
+  if(!r.data.session)return done("Account setup is not switched on yet. Ask the administrator to turn off email confirmation in Supabase.");
+  const c=await sb.rpc("claim_personnel",{p_sn:snRaw,p_dob:dob,p_phone:ph,p_username:u});
+  if(c.error){await sb.auth.signOut();return done("Could not finish setting up your account. Try again or contact HR.");}
+  S.fails=0;S.gateMode="login";try{localStorage.setItem("uwr.loginAt",String(Date.now()));}catch(x){}
+  if(await afterAuth()){logAct("Activated personnel account",snRaw);toast("Account created. Next time, sign in with your service number.");}
+}
+function startSession(rec){
+  S.me={...rec};
+  S.view=views()[0][0];S.mf="inbox";S.cf="";S.lf="Pending";S.tf="All";S.af="pending";S.uf="staff";S.att={};
+  S.f={q:"",station:"",rank:"",status:"inStrength",gender:"",sort:"rank"};
+  $("#gate").hidden=true;$("#app").hidden=false;$("#tabbar").hidden=false;
+  renderAll();
+  if(rec.mustChange)openPwForm(true);
+}
+async function resumeSession(){
+  const {data:{session}}=await sb.auth.getSession();if(!session)return false;
+  let at=0;try{at=+localStorage.getItem("uwr.loginAt")||0;}catch(e){}
+  if(Date.now()-at>SESSION_HOURS*3600e3){await sb.auth.signOut();return false;}
+  return await afterAuth();
+}
+async function signOut(msg){
+  if(S.me)logAct("Signed out","");
+  S.me=null;try{localStorage.removeItem("uwr.loginAt");}catch(e){}
+  if(chan){sb.removeChannel(chan);chan=null;}
+  Object.assign(S,{personnel:[],leave:[],transfers:[],requests:[],cases:[],memos:[],reads:{},users:[]});
+  try{await S.logQ;await sb.auth.signOut();}catch(e){}
+  S.gateMode="login";S.gateMsg=msg||"";showGate();
+}
+function syncMe(){
+  if(!S.me)return;
+  const rec=S.users.find(x=>x.id===S.me.id);
+  if(!rec||rec.active===false){signOut("Your account was disabled or removed. Contact the administrator.");return;}
+  S.me={...rec};
+}
+/* ---------- shell ---------- */
+function renderNav(){
+  if(!S.me)return;
+  const pending=leaveScoped().filter(l=>l.status==="Pending").length;
+  const cnt={personnel:people().filter(p=>IN_STRENGTH.has(p.status||"Active")).length,leave:pending||"",
+    approvals:S.requests.filter(r=>r.status==="pending").length||"",requests:S.requests.filter(r=>r.status==="pending"&&r.by===S.me.id).length||"",
+    cases:S.cases.filter(c=>c.status==="open"&&isMine(c.assignee)).length||"",memos:unreadMemos().length||""};
+  const V=views();
+  $("#nav").innerHTML=V.map(([k,l])=>`<button data-view="${k}" ${S.view===k?'aria-current="page"':""}>${I[k]}${l}<span class="count">${cnt[k]||""}</span></button>`).join("");
+  const TB=V.length>5?[...V.slice(0,4),["more","More"]]:V;const inMain=TB.some(x=>x[0]===S.view);
+  $("#tabbar").innerHTML=TB.map(([k,l])=>{const n=k==="more"?V.slice(4).reduce((s,x)=>s+(+cnt[x[0]]||0),0):(k==="personnel"?0:+cnt[k]||0);return `<button data-view="${k}" ${(S.view===k||(k==="more"&&!inMain))?'aria-current="page"':""}>${I[k]}<span>${l}${n?` <b class="tbn">${n}</b>`:""}</span></button>`;}).join("");
+  $("#meBox").innerHTML=`<div class="me"><span class="av" aria-hidden="true">${esc((S.me.name||"?").split(/\s+/).filter(w=>/^[A-Za-z]/.test(w)).slice(-2).map(w=>w[0]).join("").toUpperCase())}</span><span style="min-width:0"><b>${esc(S.me.name)}</b><small>${esc(ROLES[S.me.role]?.label||S.me.role)}</small></span></div><div class="me-actions"><button class="btn sm" data-act="changePw">Password</button><button class="btn sm" data-act="signOut">Sign out</button></div>`;
+  $("#syncState").innerHTML=S.live?'<span class="dot"></span>Connected · live updates':'<span class="dot off"></span>Loading records…';
+}
+function go(v){if(v==="more")return openMore();if(S.sheet&&S.sheet.mode==="more")closeSheet();if(!views().some(x=>x[0]===v))v=views()[0][0];S.view=v;try{localStorage.setItem("uwr.view",v);}catch(e){}renderAll();window.scrollTo(0,0);}
+function renderAll(){if(!S.me)return;renderNav();if(!views().some(x=>x[0]===S.view))S.view=views()[0][0];const fn={me:vMe,cases:vCases,memos:vMemos,dashboard:vDash,personnel:vPeople,leave:vLeave,transfers:vTransfers,users:vUsers,approvals:vApprovals,requests:vRequests,settings:vSettings}[S.view]||vDash;fn();}
+function refresh(){if(!S.me)return;renderNav();const ae=document.activeElement;const typing=ae&&(ae.tagName==="INPUT"||ae.tagName==="TEXTAREA");
+  if(S.view==="personnel"&&$("#plist")){updatePeople();}else if(typing&&$("#main").contains(ae)){}else renderAll();
+  if(S.sheet&&!(typing&&$("#pane").contains(ae))){if(S.sheet.mode==="profile")openProfile(S.sheet.id,true);else if(S.sheet.mode==="case")openCase(S.sheet.id,true);}}
+function header(eyebrow,title,actions){return `<div class="topbar"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1></div><div class="actions">${actions||""}</div></div>${banners()}`;}
+function banners(){
+  let h="";
+
+  if(S.err)h+=`<div class="banner warn"><p>${esc(S.err)}</p></div>`;
+  if(isScoped(S.me))h+=`<div class="banner info"><p>You are seeing <b>${esc(scopeLabel(S.me))}</b> only.</p></div>`;
+  if(S.me&&S.me.role!=="admin"&&S.me.role!=="viewer"&&S.view!=="requests"){const mine=S.requests.filter(r=>r.status==="pending"&&r.by===S.me.id).length;if(mine)h+=`<div class="banner"><p>${mine} of your changes ${mine===1?"is":"are"} waiting for the regional administrator's approval.</p><button class="btn sm" data-go="requests">View</button></div>`;}
+  if(isAdmin()&&S.view!=="approvals"){const n=S.requests.filter(r=>r.status==="pending").length;if(n)h+=`<div class="banner warn"><p><b>${n} change${n===1?"":"s"} waiting for your approval.</b> Nothing takes effect until you approve it.</p><button class="btn sm primary" data-go="approvals">Review now</button></div>`;}
+  const ex=S.personnel.filter(p=>p.example).length;
+  if(ex&&can("examples"))h+=`<div class="banner info"><p><b>${ex} example records are loaded</b> so you can see how the register works. Remove them before you enter or import your nominal roll.</p><button class="btn sm" data-act="clearExamples">Remove examples</button></div>`;
+  return h;
+}
+const If=(c,h)=>c?h:"";
+
+/* ---------- dashboard ---------- */
+function vDash(){
+  const all=people(), str=all.filter(p=>IN_STRENGTH.has(p.status||"Active"));
+  const male=str.filter(p=>p.gender==="Male").length, female=str.filter(p=>p.gender==="Female").length;
+  const t=todayISO(), leaveNow=str.filter(p=>onLeaveToday(p.id)||p.status==="On Leave");
+  const in12=new Date();in12.setFullYear(in12.getFullYear()+1);const lim=in12.toISOString().slice(0,10);
+  const retiring=str.filter(p=>{const r=retireISO(p.dob);return r&&r<=lim;}).sort((a,b)=>retireISO(a.dob).localeCompare(retireISO(b.dob)));
+  const byStation=count(str,"station",S.lists.stations), byRank=count(str,"rank",S.lists.ranks);
+  const LV=leaveScoped(), pend=LV.filter(l=>l.status==="Pending");
+  const incomplete=str.filter(p=>completeness(p)<75);
+  const blood=BLOOD.map(b=>[b,str.filter(p=>p.bloodGroup===b).length]);
+  const noBlood=str.filter(p=>!p.bloodGroup).length;
+  const recentTr=trScoped().sort((a,b)=>(b.effectiveDate||"").localeCompare(a.effectiveDate||"")).slice(0,5);
+  const endingSoon=LV.filter(l=>l.status==="Approved"&&l.end>=t&&daysBetween(t,l.end)<=7);
+  const pendTr=trScoped().filter(x=>x.status==="Pending");
+  const alerts=[];
+  pend.slice(0,4).forEach(l=>{const p=byId(l.personnelId);alerts.push(`<li>${chip("Leave request","warn")}<span class="grow"><button class="linkish" data-open="${esc(l.personnelId)}">${esc(p?p.rank+" "+shortName(p):"Unknown")}</button> · ${esc(l.type)}, ${daysBetween(l.start,l.end)} days from ${fmtD(l.start)}</span></li>`);});
+  if(can("effectTransfer"))pendTr.slice(0,3).forEach(x=>{const p=byId(x.personnelId);alerts.push(`<li>${chip("Transfer","warn")}<span class="grow"><button class="linkish" data-open="${esc(x.personnelId)}">${esc(p?p.rank+" "+shortName(p):"Unknown")}</button> · ${esc(x.from||"—")} to ${esc(x.to||"—")} awaiting effect</span></li>`);});
+  endingSoon.slice(0,3).forEach(l=>{const p=byId(l.personnelId);alerts.push(`<li>${chip("Resuming","info")}<span class="grow"><button class="linkish" data-open="${esc(l.personnelId)}">${esc(p?p.rank+" "+shortName(p):"Unknown")}</button> · ${esc(l.type)} leave ends ${fmtD(l.end)}</span></li>`);});
+  retiring.slice(0,4).forEach(p=>alerts.push(`<li>${chip("Retirement","bad")}<span class="grow"><button class="linkish" data-open="${esc(p.id)}">${esc(p.rank+" "+shortName(p))}</button> · reaches ${RETIRE_AGE} on ${fmtD(retireISO(p.dob))}</span></li>`));
+  if(incomplete.length)alerts.push(`<li>${chip("Records","")}<span class="grow">${incomplete.length} profile${incomplete.length>1?"s are":" is"} missing key details (phone, blood group, next of kin, Ghana Card). <button class="linkish" data-go="personnel" data-sort="complete">Review</button></span></li>`);
+  const scoped=isScoped(S.me);
+  $("#main").innerHTML=header(scoped?scopeLabel(S.me):"Upper West Regional Command",S.me.role==="district"?"District strength":S.me.role==="dept"?"Unit strength":"Regional strength",If(can("addPerson"),`<button class="btn primary" data-act="addPerson">${I.plus}Add personnel</button>`))+`
+  <div class="kpis">
+    <div class="kpi accent"><span class="label">Total strength</span><span class="value">${str.length}</span><span class="sub">${male} male · ${female} female</span></div>
+    <div class="kpi"><span class="label">On duty</span><span class="value">${str.filter(p=>(p.status||"Active")==="Active"&&!onLeaveToday(p.id)).length}</span><span class="sub">Active, not on leave today</span></div>
+    <div class="kpi"><span class="label">On leave today</span><span class="value">${leaveNow.length}</span><span class="sub">${pend.length} request${pend.length===1?"":"s"} pending</span></div>
+    <div class="kpi"><span class="label">Retiring in 12 months</span><span class="value">${retiring.length}</span><span class="sub">Compulsory age ${RETIRE_AGE}</span></div>
+  </div>
+  <div class="grid2">
+    <section class="panel"><h2>Strength by station <small>${byStation.length} station${byStation.length===1?"":"s"}</small></h2>${bars(byStation,"")}</section>
+    <section class="panel"><h2>Strength by rank <small>Senior to junior</small></h2>${bars(byRank,"rank")}</section>
+  </div>
+  <div class="grid2">
+    <section class="panel"><h2>Needs attention</h2>${alerts.length?`<ul class="alerts">${alerts.join("")}</ul>`:`<p class="empty">Nothing needs attention right now.</p>`}</section>
+    <section class="panel"><h2>Blood groups <small>${noBlood} not recorded</small></h2><div class="bloods">${blood.map(([b,n])=>`<div class="blood"><b>${b}</b><span>${n}</span></div>`).join("")}</div>
+      <h2 style="margin-top:20px">Recent transfers</h2>${recentTr.length?`<ul class="alerts">${recentTr.map(r=>{const p=byId(r.personnelId);return `<li><span class="grow"><button class="linkish" data-open="${esc(r.personnelId)}">${esc(p?p.rank+" "+shortName(p):"Unknown")}</button><br><span class="muted route">${esc(r.from||"—")}<i>→</i>${esc(r.to||"—")}</span></span>${chip(r.status,TR_TONE[r.status])}</li>`;}).join("")}</ul>`:`<p class="empty">No transfers recorded yet.</p>`}
+    </section>
+  </div>`;
+}
+function count(arr,key,order){
+  const m=new Map();arr.forEach(p=>{const k=p[key]||"Not set";m.set(k,(m.get(k)||0)+1);});
+  return [...m.entries()].sort((a,b)=>{const ia=order.indexOf(a[0]),ib=order.indexOf(b[0]);return (ia<0?999:ia)-(ib<0?999:ib)||b[1]-a[1];});
+}
+function bars(rows,cls){
+  if(!rows.length)return `<p class="empty">No personnel recorded yet.</p>`;
+  const max=Math.max(...rows.map(r=>r[1]));
+  return `<div class="bars">${rows.map(([k,n])=>`<div class="bar ${cls}"><span class="name" title="${esc(k)}">${esc(k)}</span><span class="track"><span class="fill" style="width:${(n/max*100).toFixed(1)}%;display:block"></span></span><span class="n">${n}</span></div>`).join("")}</div>`;
+}
+
+/* ---------- personnel ---------- */
+function optList(arr,val,blank){return (blank!=null?`<option value="">${esc(blank)}</option>`:"")+arr.map(o=>`<option ${o===val?"selected":""}>${esc(o)}</option>`).join("");}
+function myStations(){const st=S.me.stations||[];if(S.me.role==="admin"||S.me.role==="hr"||!st.length)return S.lists.stations;return S.lists.stations.filter(s=>st.includes(s)).concat(st.filter(s=>!S.lists.stations.includes(s)));}
+function vPeople(){
+  const f=S.f;
+  $("#main").innerHTML=header(isScoped(S.me)?scopeLabel(S.me):"Nominal roll","Personnel",`${If(can("import"),`<button class="btn" data-act="import">${I.up}Import CSV</button>`)}<button class="btn" data-act="export">${I.down}Export CSV</button>${If(can("addPerson"),`<button class="btn primary" data-act="addPerson">${I.plus}Add</button>`)}`)+`
+  <div class="toolbar">
+    <label class="search"><span hidden>Search</span>${I.search}<input id="q" type="search" list="dl_q" placeholder="Search name, service number, phone" value="${esc(f.q)}" autocomplete="off">${peopleDatalist("dl_q",people())}</label>
+    <select class="f" id="fStation" aria-label="Station">${optList(myStations(),f.station,S.me.role==="district"?"All my stations":"All stations")}</select>
+    <select class="f" id="fRank" aria-label="Rank">${optList(S.lists.ranks,f.rank,"All ranks")}</select>
+    <select class="f" id="fStatus" aria-label="Status"><option value="inStrength" ${f.status==="inStrength"?"selected":""}>In strength</option><option value="" ${f.status===""?"selected":""}>All statuses</option>${STATUSES.map(s=>`<option ${s===f.status?"selected":""}>${s}</option>`).join("")}</select>
+    <select class="f" id="fGender" aria-label="Gender">${optList(["Male","Female"],f.gender,"All genders")}</select>
+    <select class="f" id="fSort" aria-label="Sort by"><option value="rank">Sort: seniority</option><option value="name">Sort: surname</option><option value="station">Sort: station</option><option value="retire">Sort: retirement date</option><option value="complete">Sort: least complete</option></select>
+  </div>
+  <div id="plist"></div>`;
+  $("#fSort").value=f.sort;
+  updatePeople();
+}
+function filtered(){
+  const f=S.f,q=f.q.replace(/[()]/g," ").trim().toLowerCase();
+  let r=people().filter(p=>{
+    const st=p.status||"Active";
+    if(f.status==="inStrength"&&!IN_STRENGTH.has(st))return false;
+    if(f.status&&f.status!=="inStrength"&&st!==f.status)return false;
+    if(f.station&&p.station!==f.station)return false;
+    if(f.rank&&p.rank!==f.rank)return false;
+    if(f.gender&&p.gender!==f.gender)return false;
+    if(q){const hay=[p.serviceNo,p.surname,p.firstName,p.otherNames,p.phone,p.altPhone,p.unit,p.appointment,p.ghanaCard].join(" ").toLowerCase();if(!q.split(/\s+/).every(w=>hay.includes(w)))return false;}
+    return true;});
+  const nm=(a,b)=>(a.surname||"").localeCompare(b.surname||"")||(a.firstName||"").localeCompare(b.firstName||"");
+  const s={rank:(a,b)=>rankIdx(a.rank)-rankIdx(b.rank)||(a.lastPromotion||"9").localeCompare(b.lastPromotion||"9")||nm(a,b),
+    name:nm,station:(a,b)=>(a.station||"").localeCompare(b.station||"")||rankIdx(a.rank)-rankIdx(b.rank),
+    retire:(a,b)=>(retireISO(a.dob)||"9999").localeCompare(retireISO(b.dob)||"9999"),
+    complete:(a,b)=>completeness(a)-completeness(b)||nm(a,b)}[f.sort]||nm;
+  return r.sort(s);
+}
+function updatePeople(){
+  const rows=filtered(), el=$("#plist"); if(!el)return;
+  const total=people().length;
+  if(!total){el.innerHTML=`<div class="panel"><h2>No personnel yet</h2><p class="muted">${isScoped(S.me)?"No officers are recorded under "+esc(scopeLabel(S.me))+" yet.":"Add officers one by one, or import your nominal roll from Excel saved as CSV. Use Export CSV first to get a template with the right column headings."}</p>${If(can("addPerson"),`<div class="actions"><button class="btn primary" data-act="addPerson">${I.plus}Add personnel</button>${If(can("import"),`<button class="btn" data-act="import">${I.up}Import CSV</button>`)}</div>`)}</div>`;return;}
+  el.innerHTML=`<p class="resultline">Showing ${rows.length} of ${total} records</p>
+  <div class="tablewrap people"><table><thead><tr><th>Name</th><th>Service no.</th><th>Rank</th><th>Station</th><th class="mobile-hide">Unit</th><th>Phone</th><th>Status</th><th>Record</th></tr></thead><tbody>
+  ${rows.map(p=>{const st=p.status||"Active";const lv=onLeaveToday(p.id)&&st==="Active";return `<tr class="click" data-open="${esc(p.id)}" tabindex="0"><td><span class="who">${avatar(p)}<b>${esc(p.surname?p.surname.toUpperCase():"")}</b> ${esc(p.firstName||"")}${p.example?" "+chip("Example",""):""}</span></td><td class="mono">${esc(p.serviceNo||"—")}</td><td class="rank">${esc(p.rank||"—")}</td><td>${esc(p.station||"—")}</td><td class="mobile-hide">${esc(p.unit||"—")}</td><td class="num">${esc(p.phone||"—")}</td><td>${lv?chip("On Leave","info"):chip(st,STATUS_TONE[st])}</td><td class="num">${completeness(p)}%</td></tr>`;}).join("")}
+  </tbody></table></div>
+  <div class="cards">${rows.map(p=>{const st=p.status||"Active";const lv=onLeaveToday(p.id)&&st==="Active";return `<button class="pcard" data-open="${esc(p.id)}">${avatar(p)}<span class="l1"><span class="rank">${esc(p.rank||"")}</span><b>${esc(shortName(p))}</b></span>${lv?chip("On Leave","info"):chip(st,STATUS_TONE[st])}<span class="l2"><span class="mono">${esc(p.serviceNo||"")}</span> · ${esc(p.station||"No station")}${p.phone?" · "+esc(p.phone):""}</span></button>`;}).join("")}</div>`;
+}
+
+/* ---------- sheet ---------- */
+function openSheet(title,body,foot,mode,id,locked){
+  S.sheet={mode,id,locked:!!locked};
+  $("#pane").innerHTML=`<div class="pane-head"><h2>${esc(title)}</h2>${locked?"":`<button class="btn ghost" data-close aria-label="Close">${I.close}</button>`}</div><div class="pane-body">${body}</div>${foot?`<div class="pane-foot">${foot}</div>`:""}`;
+  const sh=$("#sheet");const wasOpen=!sh.hidden;sh.hidden=false;document.body.style.overflow="hidden";
+  if(!wasOpen){const b=$("#pane .pane-body");b.scrollTop=0;}
+}
+function closeSheet(force){if(S.sheet&&S.sheet.locked&&!force)return;S.sheet=null;$("#sheet").hidden=true;document.body.style.overflow="";}
+
+function profileHTML(p){
+  const id=p.id;
+  const st=p.status||"Active", age=yearsSince(p.dob), svc=yearsSince(p.dateEnlisted), comp=completeness(p);
+  const lv=S.leave.filter(l=>l.personnelId===id).sort((a,b)=>(b.start||"").localeCompare(a.start||""));
+  const tr=S.transfers.filter(t=>t.personnelId===id).sort((a,b)=>(b.effectiveDate||"").localeCompare(a.effectiveDate||""));
+  const yr=String(new Date().getFullYear());
+  const annualUsed=lv.filter(l=>l.type==="Annual"&&l.status==="Approved"&&(l.start||"").startsWith(yr)).reduce((s,l)=>s+daysBetween(l.start,l.end),0);
+  const d=(l,v,w)=>`<div class="${w?"wide":""}"><dt>${l}</dt><dd>${v||'<span class="muted">—</span>'}</dd></div>`;
+  const pend=pendingOn("personnel",id);
+  const body=`${pend.length?`<div class="banner warn"><p>${pend.length===1?"A change":pend.length+" changes"} to this record ${pend.length===1?"is":"are"} waiting for the regional administrator's approval: ${esc(pend.map(r=>r.action+" by "+r.byName).join("; "))}.</p>${If(isAdmin(),`<button class="btn sm" data-go="approvals">Review</button>`)}</div>`:""}
+  <div class="hero">${avatar(p,"lg")}<div style="min-width:0"><div class="rank">${esc(p.rank||"")}</div><div class="n1">${esc(fullName(p))}</div>
+    <div class="meta"><span class="mono">${esc(p.serviceNo||"No service number")}</span>${chip(onLeaveToday(id)&&st==="Active"?"On Leave":st,STATUS_TONE[st])}${p.example?chip("Example",""):""}</div>
+    <div class="muted" style="font-size:13px;margin-top:8px">Record ${comp}% complete</div><div class="meter" style="width:180px;max-width:100%"><i style="width:${comp}%"></i></div></div></div>
+  <section class="panel"><h2>Service</h2><dl class="dl">
+    ${d("Station",esc(p.station))}${d("Unit / department",esc(p.unit))}
+    ${d("Appointment",esc(p.appointment),1)}
+    ${d("Date enlisted",p.dateEnlisted?fmtD(p.dateEnlisted)+(svc!=null?` <span class="muted">(${svc} yrs)</span>`:""):"")}${d("Last promotion",p.lastPromotion?fmtD(p.lastPromotion):"")}
+    ${d("Retirement date",p.dob?fmtD(retireISO(p.dob)):"")}${d("Annual leave taken "+yr,annualUsed+" days")}
+  </dl></section>
+  <section class="panel"><h2>Personal</h2><dl class="dl">
+    ${d("Gender",esc(p.gender))}${d("Date of birth",p.dob?fmtD(p.dob)+(age!=null?` <span class="muted">(${age})</span>`:""):"")}
+    ${d("Blood group",p.bloodGroup?`<b>${esc(p.bloodGroup)}</b>`:"")}${d("Marital status",esc(p.maritalStatus))}
+    ${d("Ghana Card",p.ghanaCard?`<span class="mono">${esc(p.ghanaCard)}</span>`:"")}${d("Hometown / region",esc([p.hometown,p.regionOrigin].filter(Boolean).join(", ")))}
+  </dl></section>
+  <section class="panel"><h2>Contact & next of kin</h2><dl class="dl">
+    ${d("Phone",esc([p.phone,p.altPhone].filter(Boolean).join(" / ")))}${d("Email",esc(p.email))}
+    ${d("Address",esc(p.address),1)}
+    ${d("Next of kin",esc([p.nokName,p.nokRelation&&"("+p.nokRelation+")"].filter(Boolean).join(" ")))}${d("Next of kin phone",esc(p.nokPhone))}
+  </dl></section>
+  ${(p.qualifications||p.courses||p.notes)?`<section class="panel"><h2>Qualifications & notes</h2><dl class="dl">${d("Qualifications",esc(p.qualifications).replace(/\n/g,"<br>"),1)}${d("Service courses",esc(p.courses).replace(/\n/g,"<br>"),1)}${d("Remarks",esc(p.notes).replace(/\n/g,"<br>"),1)}</dl></section>`:""}
+  <section class="panel"><h2>Leave history ${If(can("recordLeave",p),`<button class="btn sm" data-act="addLeave" data-pid="${esc(id)}">${I.plus}${S.me.role==="dept"?"Request leave":"Record leave"}</button>`)}</h2>
+    ${lv.length?`<ul class="hist">${lv.map(l=>`<li><span><b>${esc(l.type)}</b> · ${fmtD(l.start)} – ${fmtD(l.end)} <span class="muted">(${daysBetween(l.start,l.end)} days)</span></span>${chip(l.status,LEAVE_TONE[l.status])}</li>`).join("")}</ul>`:`<p class="empty">No leave recorded.</p>`}</section>
+  <section class="panel"><h2>Transfer history ${If(can("recordTransfer",p),`<button class="btn sm" data-act="addTransfer" data-pid="${esc(id)}">${I.plus}${S.me.role==="district"?"Request transfer":"Record transfer"}</button>`)}</h2>
+    ${tr.length?`<ul class="hist">${tr.map(t=>`<li><span class="route">${esc(t.from||"—")}<i>→</i>${esc(t.to||"—")}</span><span class="muted">${fmtD(t.effectiveDate)} ${chip(t.status,TR_TONE[t.status])}</span></li>`).join("")}</ul>`:`<p class="empty">No transfers recorded.</p>`}</section>`;
+  return body.replace('<section class="panel"><h2>Leave history',docsHTML(p)+'<section class="panel"><h2>Leave history');
+}
+function openProfile(id,keepScroll){
+  const p=byId(id);
+  if(!p||!scopeOK(p)){if(!keepScroll)toast(p?"That officer is outside your area of access.":"That record no longer exists.");closeSheet(true);return;}
+  const sc=keepScroll?$("#pane .pane-body")?.scrollTop:0;
+  const body=profileHTML(p);
+  const foot=[If(can("deletePerson"),`<button class="btn danger" data-act="delPerson" data-id="${esc(id)}">Delete</button>`),`<span class="spacer"></span>`,If(can("editPerson",p),`<button class="btn primary" data-act="editPerson" data-id="${esc(id)}">${I.edit}Edit record</button>`)].join("");
+  openSheet(p.rank?p.rank+" "+shortName(p):shortName(p),body,(can("deletePerson")||can("editPerson",p))?foot:"","profile",id);
+  if(keepScroll&&sc)$("#pane .pane-body").scrollTop=sc;
+}
+
+function field([k,l,type,o],val){
+  o=o||{};const id="pf_"+k, req=o.req?' <span class="req">*</span>':"", w=o.wide||type==="textarea"?" wide":"";
+  let ctl;
+  if(type.startsWith("sel:")){const key=type.slice(4);let arr=key==="stations"?myStations():(S.lists[key]||OPTS[key]||[]);const list=val&&!arr.includes(val)&&S.me.role!=="district"?[val,...arr]:arr;
+    ctl=`<select id="${id}" name="${k}">${optList(list,val||(k==="status"?"Active":""),S.me.role==="district"&&key==="stations"?null:"Select…")}</select>`;}
+  else if(type.startsWith("list:")){const key=type.slice(5);ctl=`<input id="${id}" name="${k}" list="dl_${key}" value="${esc(val)}"><datalist id="dl_${key}">${(S.lists[key]||[]).map(x=>`<option value="${esc(x)}">`).join("")}</datalist>`;}
+  else if(type==="textarea")ctl=`<textarea id="${id}" name="${k}">${esc(val)}</textarea>`;
+  else if(k==="surname"||k==="firstName"||k==="otherNames"||k==="nokName"){const vals=[...new Set(S.personnel.map(p=>k==="nokName"?p.nokName:p[k]).filter(Boolean))].sort();ctl=`<input id="${id}" name="${k}" list="dl_${k}" value="${esc(val)}" autocomplete="off"><datalist id="dl_${k}">${vals.map(v=>`<option value="${esc(v)}">`).join("")}</datalist>`;}
+  else ctl=`<input id="${id}" name="${k}" type="${type}" value="${esc(val)}" ${o.ph?`placeholder="${esc(o.ph)}"`:""} ${type==="tel"?'inputmode="tel"':""} autocomplete="off">`;
+  const hint=k==="station"&&S.me.role==="district"?`<span class="hint">Moving an officer out of your stations is done by a transfer request.</span>`:"";
+  return `<div class="fld${w}"><label for="${id}">${esc(l)}${req}</label>${ctl}${hint}</div>`;
+}
+function openPersonForm(id){
+  const p=id?{...byId(id)}:{status:"Active"};
+  if(id&&!can("editPerson",p))return toast("You cannot edit this record.");
+  if(!id&&!can("addPerson"))return;
+  S.formPhoto=p.photoId||"";
+  const photo=`<fieldset><legend>Photo</legend><div class="photo-row"><span id="photoPrev">${avatar(p,"lg")}</span><div style="display:flex;flex-direction:column;gap:6px"><button type="button" class="btn sm" data-act="pickPhoto">Choose passport photo</button><span class="hint muted" style="font-size:12px">JPEG or PNG, under 5 MB</span></div></div></fieldset>`;
+  const body=`<form id="pform" novalidate>${photo}${PFORM.map(s=>`<fieldset><legend>${esc(s.t)}</legend>${s.f.map(fd=>field(fd,p[fd[0]])).join("")}</fieldset>`).join("")}<p class="err" id="perr" hidden></p></form>`;
+  openSheet(id?"Edit "+shortName(p):"New personnel record",body,`<button class="btn" data-act="${id?"cancelEdit":"close"}" data-id="${esc(id||"")}">Cancel</button><button class="btn primary" data-act="savePerson" data-id="${esc(id||"")}">Save record</button>`,"form",id);
+  $("#pform").style.cssText="display:flex;flex-direction:column;gap:14px";
+}
+async function savePerson(id){
+  const form=$("#pform"),data={};
+  PFORM.forEach(s=>s.f.forEach(([k])=>{const el=form.elements[k];if(el)data[k]=el.value.trim();}));
+  const err=$("#perr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  const miss=["serviceNo","rank","surname","firstName"].filter(k=>!data[k]);
+  if(miss.length)return fail("Fill in the service number, rank, surname and first name before saving.");
+  if(S.me.role==="district"&&!(S.me.stations||[]).includes(data.station))return fail("Choose one of your stations.");
+  const dup=S.personnel.find(x=>x.id!==id&&(x.serviceNo||"").toLowerCase()===data.serviceNo.toLowerCase());
+  if(dup)return fail(`Service number ${data.serviceNo} is already on the register${scopeOK(dup)?" for "+dup.rank+" "+shortName(dup):""}.`);
+  const prev=id?byId(id):null;
+  const rec={...(prev||{}),...data,photoId:S.formPhoto||"",createdAt:prev?.createdAt||new Date().toISOString()};
+  const nid=id||(sid(data.serviceNo)&&!byId(sid(data.serviceNo))?sid(data.serviceNo):newId());
+  try{const r=await commit(id?"Edited personnel record":"Added personnel record",pLabel(rec),[{col:"personnel",id:nid,data:rec,before:prev}]);
+    if(r==="pending"){toast(PENDING_MSG);if(id)openProfile(id);else closeSheet(true);}else{toast("Record saved");openProfile(nid);}}catch(e){writeFail(e);}
+}
+
+/* ---------- leave ---------- */
+const personKey=p=>`${p.rank?p.rank+" ":""}${(p.surname||"").toUpperCase()} ${p.firstName||""}${p.otherNames?" "+p.otherNames:""} (${p.serviceNo||"no service no."})`.replace(/\s+/g," ").trim();
+function resolvePerson(txt,list){
+  txt=(txt||"").trim();if(!txt)return null;list=list||people();
+  const m=/\(([^()]+)\)\s*$/.exec(txt);
+  if(m){const sn=m[1].trim().toLowerCase();const hit=list.find(p=>(p.serviceNo||"").toLowerCase()===sn);if(hit)return hit;}
+  const t=txt.toLowerCase();
+  const exact=list.filter(p=>(p.serviceNo||"").toLowerCase()===t||personKey(p).toLowerCase()===t);if(exact.length===1)return exact[0];
+  const words=t.replace(/[()]/g," ").split(/\s+/).filter(Boolean);
+  const hits=list.filter(p=>{const h=personKey(p).toLowerCase();return words.every(w=>h.includes(w));});
+  return hits.length===1?hits[0]:null;
+}
+function peopleDatalist(id,list){return `<datalist id="${id}">${list.map(p=>`<option value="${esc(personKey(p))}">`).join("")}</datalist>`;}
+/* A typed name box that suggests officers from the register and fills a hidden id field */
+function personPicker(inputId,hiddenName,selId,list,ph){
+  list=list||people().filter(p=>IN_STRENGTH.has(p.status||"Active")||p.id===selId);
+  const sel=selId?byId(selId):null;const dl="dl_"+inputId;
+  return `<input id="${inputId}" list="${dl}" data-pick="${hiddenName}" value="${esc(sel?personKey(sel):"")}" placeholder="${esc(ph||"Start typing a name or service number")}" autocomplete="off"><input type="hidden" name="${hiddenName}" value="${esc(selId||"")}">${peopleDatalist(dl,list)}<span class="hint pickhint" id="${inputId}_hint">${sel?"":"Pick a name from the suggestions."}</span>`;
+}
+const userKey=u=>`${u.name} — ${ROLES[u.role]?.label||u.role} [${u.username}]`;
+function resolveUser(txt){txt=(txt||"").trim();if(!txt)return null;const m=/\[([^\[\]]+)\]\s*$/.exec(txt);if(m)return S.users.find(u=>u.username===m[1])||null;const t=txt.toLowerCase();const hits=S.users.filter(u=>u.active!==false&&(u.name||"").toLowerCase().includes(t));return hits.length===1?hits[0]:null;}
+function usersDatalist(id,list){return `<datalist id="${id}">${(list||S.users.filter(u=>u.active!==false)).map(u=>`<option value="${esc(userKey(u))}">`).join("")}</datalist>`;}
+function vLeave(){
+  const t=todayISO();
+  let rows=leaveScoped();
+  if(S.lf==="Current")rows=rows.filter(l=>l.status==="Approved"&&l.start<=t&&l.end>=t);
+  else if(S.lf!=="All")rows=rows.filter(l=>l.status===S.lf);
+  rows.sort((a,b)=>(b.start||"").localeCompare(a.start||""));
+  const segs=["Pending","Current","Approved","Rejected","All"];
+  const canAdd=S.me.role!=="viewer"&&S.canWrite;
+  $("#main").innerHTML=header("Leave management","Leave",If(canAdd,`<button class="btn primary" data-act="addLeave">${I.plus}${S.me.role==="dept"?"Request leave":"Record leave"}</button>`))+`
+  <div class="segs" role="group" aria-label="Filter leave">${segs.map(s=>`<button data-lf="${s}" aria-pressed="${S.lf===s}">${s==="Current"?"On leave today":s}</button>`).join("")}</div>
+  <div class="rowlist">${rows.length?rows.map(l=>{const p=byId(l.personnelId);const ap=p&&can("approveLeave",p);return `<div class="rec"><div class="top"><span class="rank">${esc(p?.rank||"")}</span><button class="linkish" data-open="${esc(l.personnelId)}">${esc(p?shortName(p):"Removed record")}</button>${chip(l.status,LEAVE_TONE[l.status])}${pendingOn("leave",l.id).length?chip("Change awaiting approval","warn"):""}</div>
+    <div class="btns">${ap&&l.status==="Pending"?`<button class="btn sm" data-act="leaveStatus" data-id="${esc(l.id)}" data-s="Approved">Approve</button><button class="btn sm" data-act="leaveStatus" data-id="${esc(l.id)}" data-s="Rejected">Reject</button>`:""}${If(ap||(p&&can("recordLeave",p)&&l.status==="Pending"),`<button class="btn sm ghost" data-act="editLeave" data-id="${esc(l.id)}">Edit</button>`)}</div>
+    <div class="sub"><span><b>${esc(l.type)}</b> leave</span><span>${fmtD(l.start)} – ${fmtD(l.end)}</span><span class="num">${daysBetween(l.start,l.end)} days</span>${p?.station?`<span>${esc(p.station)}</span>`:""}${l.remarks?`<span>${esc(l.remarks)}</span>`:""}</div></div>`;}).join(""):`<div class="panel"><p class="empty">${S.lf==="All"?"No leave records yet.":S.lf==="Current"?"No officers are on leave today.":"No "+S.lf.toLowerCase()+" leave."}</p></div>`}</div>`;
+}
+function openLeaveForm(id,pid){
+  const l=id?S.leave.find(x=>x.id===id):{personnelId:pid||"",type:"Annual",status:"Pending",start:todayISO(),end:""};
+  const p=l.personnelId?byId(l.personnelId):null;
+  const canApprove=p?can("approveLeave",p):(S.me.role!=="dept");
+  const statusCtl=canApprove?`<select id="l_s" name="status">${optList(LEAVE_STATUS,l.status)}</select>`:`<select id="l_s" name="status" disabled><option>Pending</option></select><span class="hint">HR or the district commander approves.</span>`;
+  const body=`<form id="lform" novalidate style="display:flex;flex-direction:column;gap:14px"><fieldset>
+    <div class="fld wide"><label for="l_p">Officer <span class="req">*</span></label>${personPicker("l_p","personnelId",l.personnelId)}</div>
+    <div class="fld"><label for="l_t">Leave type</label><select id="l_t" name="type">${optList(LEAVE_TYPES,l.type)}</select></div>
+    <div class="fld"><label for="l_s">Status</label>${statusCtl}</div>
+    <div class="fld"><label for="l_a">Start date <span class="req">*</span></label><input id="l_a" name="start" type="date" value="${esc(l.start)}"></div>
+    <div class="fld"><label for="l_b">End date <span class="req">*</span></label><input id="l_b" name="end" type="date" value="${esc(l.end)}"></div>
+    <div class="fld"><label for="l_r">Relieving officer</label><input id="l_r" name="relief" list="dl_relief" value="${esc(l.relief)}" autocomplete="off" placeholder="Type a name">${peopleDatalist("dl_relief",people().filter(p=>IN_STRENGTH.has(p.status||"Active")))}</div>
+    <div class="fld"><label for="l_ref">Approval reference</label><input id="l_ref" name="ref" value="${esc(l.ref)}"></div>
+    <div class="fld wide"><label for="l_m">Remarks</label><textarea id="l_m" name="remarks">${esc(l.remarks)}</textarea></div>
+    <p class="hint muted wide" id="ldays" style="margin:0;font-size:13px"></p></fieldset><p class="err" id="lerr" hidden></p></form>`;
+  openSheet(id?"Edit leave":(S.me.role==="dept"?"Request leave":"Record leave"),body,`${id&&canApprove?`<button class="btn danger" data-act="delLeave" data-id="${esc(id)}">Delete</button><span class="spacer"></span>`:""}<button class="btn" data-close>Cancel</button><button class="btn primary" data-act="saveLeave" data-id="${esc(id||"")}">Save</button>`,"leaveForm",id);
+  const upd=()=>{const f=$("#lform");const n=daysBetween(f.start.value,f.end.value);$("#ldays").textContent=n>0?n+" calendar days":"";};
+  $("#lform").addEventListener("input",upd);upd();
+}
+async function saveLeave(id){
+  const f=$("#lform"),d={};["personnelId","type","status","start","end","relief","ref","remarks"].forEach(k=>d[k]=f.elements[k].value.trim());
+  const e=$("#lerr");const fail=m=>{e.textContent=m;e.hidden=false;};
+  if(!d.personnelId||!d.start||!d.end)return fail("Choose the officer from the name suggestions, and fill in both dates.");
+  if(d.end<d.start)return fail("The end date is before the start date.");
+  const p=byId(d.personnelId);if(!p||!can("recordLeave",p))return fail("That officer is outside your area of access.");
+  const prev=id?S.leave.find(x=>x.id===id):null;
+  if(!can("approveLeave",p))d.status=prev?prev.status:"Pending";
+  if(!prev)d.requestedBy=S.me.id;
+  if(d.status!=="Pending"&&(!prev||prev.status!==d.status))d.decidedBy=S.me.id;
+  try{const r=await commit(id?"Edited leave":"Recorded leave",`${d.type} leave for ${pLabel(p)}, ${fmtD(d.start)} to ${fmtD(d.end)} (${d.status})`,[{col:"leave",id:id||newId(),data:{...(prev||{}),...d},before:prev}]);closeSheet();toast(r==="pending"?PENDING_MSG:"Leave saved");}catch(err){writeFail(err);}
+}
+
+/* ---------- transfers ---------- */
+function vTransfers(){
+  let rows=trScoped();if(S.tf!=="All")rows=rows.filter(t=>t.status===S.tf);
+  rows.sort((a,b)=>(b.effectiveDate||b.dateIssued||"").localeCompare(a.effectiveDate||a.dateIssued||""));
+  const segs=["All","Pending","Effected","Cancelled"];
+  const canAdd=["admin","hr","district"].includes(S.me.role)&&S.canWrite;
+  $("#main").innerHTML=header("Postings","Transfers",If(canAdd,`<button class="btn primary" data-act="addTransfer">${I.plus}${S.me.role==="district"?"Request transfer":"Record transfer"}</button>`))+`
+  <div class="segs" role="group" aria-label="Filter transfers">${segs.map(s=>`<button data-tf="${s}" aria-pressed="${S.tf===s}">${s}</button>`).join("")}</div>
+  <p class="resultline" style="margin:0">${S.me.role==="district"?"Your transfer requests stay Pending until HR effects them and the regional administrator approves.":"Marking a transfer as <b>Effected</b> updates the officer's station. A posting out of the region marks them Transferred Out."}</p>
+  <div class="rowlist">${rows.length?rows.map(t=>{const p=byId(t.personnelId);return `<div class="rec"><div class="top"><span class="rank">${esc(p?.rank||"")}</span><button class="linkish" data-open="${esc(t.personnelId)}">${esc(p?shortName(p):"Removed record")}</button>${chip(t.type,"")}${chip(t.status,TR_TONE[t.status])}${pendingOn("transfers",t.id).length?chip("Change awaiting approval","warn"):""}</div>
+    <div class="btns">${can("effectTransfer")&&t.status==="Pending"?`<button class="btn sm" data-act="effect" data-id="${esc(t.id)}">Mark effected</button>`:""}${If(can("effectTransfer")||(p&&can("recordTransfer",p)&&t.status==="Pending"),`<button class="btn sm ghost" data-act="editTransfer" data-id="${esc(t.id)}">Edit</button>`)}</div>
+    <div class="sub"><span class="route">${esc(t.from||"—")}<i>→</i>${esc(t.to||"—")}</span><span>Effective ${fmtD(t.effectiveDate)}</span>${t.ref?`<span>Ref. <span class="mono">${esc(t.ref)}</span></span>`:""}${t.remarks?`<span>${esc(t.remarks)}</span>`:""}</div></div>`;}).join(""):`<div class="panel"><p class="empty">No transfers ${S.tf==="All"?"recorded yet":"with this status"}.</p></div>`}</div>`;
+}
+function openTransferForm(id,pid){
+  const t=id?S.transfers.find(x=>x.id===id):{personnelId:pid||"",type:"Internal",status:"Pending",from:pid?(byId(pid)?.station||""):"",to:"",effectiveDate:""};
+  const eff=can("effectTransfer");
+  const dl=`<datalist id="dl_st">${S.lists.stations.map(s=>`<option value="${esc(s)}">`).join("")}${REGIONS.filter(r=>r!=="Upper West").map(r=>`<option value="${esc(r)} Region">`).join("")}<option value="National Headquarters, Accra"></datalist>`;
+  const body=`<form id="tform" novalidate style="display:flex;flex-direction:column;gap:14px"><fieldset>
+    <div class="fld wide"><label for="t_p">Officer <span class="req">*</span></label>${personPicker("t_p","personnelId",t.personnelId)}${If(eff,`<span class="hint">Officer posted in from another region? Add their personnel record first.</span>`)}</div>
+    <div class="fld"><label for="t_t">Type</label><select id="t_t" name="type">${optList(TR_TYPES,t.type)}</select></div>
+    <div class="fld"><label for="t_s">Status</label>${eff?`<select id="t_s" name="status">${optList(TR_STATUS,t.status)}</select>`:`<select id="t_s" name="status" disabled><option>Pending</option></select><span class="hint">HR effects transfers.</span>`}</div>
+    <div class="fld"><label for="t_f">From</label><input id="t_f" name="from" list="dl_st" value="${esc(t.from)}"></div>
+    <div class="fld"><label for="t_to">To <span class="req">*</span></label><input id="t_to" name="to" list="dl_st" value="${esc(t.to)}"></div>
+    <div class="fld"><label for="t_i">Date of posting order</label><input id="t_i" name="dateIssued" type="date" value="${esc(t.dateIssued)}"></div>
+    <div class="fld"><label for="t_e">Effective date</label><input id="t_e" name="effectiveDate" type="date" value="${esc(t.effectiveDate)}"></div>
+    <div class="fld wide"><label for="t_r">Posting order / signal reference</label><input id="t_r" name="ref" value="${esc(t.ref)}"></div>
+    <div class="fld wide"><label for="t_m">Remarks</label><textarea id="t_m" name="remarks">${esc(t.remarks)}</textarea></div>${dl}
+  </fieldset><p class="err" id="terr" hidden></p></form>`;
+  openSheet(id?"Edit transfer":(S.me.role==="district"?"Request transfer":"Record transfer"),body,`${id&&eff?`<button class="btn danger" data-act="delTransfer" data-id="${esc(id)}">Delete</button><span class="spacer"></span>`:""}<button class="btn" data-close>Cancel</button><button class="btn primary" data-act="saveTransfer" data-id="${esc(id||"")}">Save</button>`,"trForm",id);
+  $("#t_p").addEventListener("change",()=>{const p=byId($("#tform").elements.personnelId.value);const f=$("#t_f");if(p&&!f.value)f.value=p.station||"";});
+}
+function transferPersonOp(t){
+  const p=byId(t.personnelId);if(!p)return null;
+  const upd={...p};
+  if(t.type==="Posted out"){upd.status="Transferred Out";upd.station=t.to||p.station;}
+  else{upd.station=t.to;if(!IN_STRENGTH.has(p.status||"Active"))upd.status="Active";}
+  return {col:"personnel",id:p.id,data:upd,before:p};
+}
+async function saveTransfer(id){
+  const f=$("#tform"),d={};["personnelId","type","status","from","to","dateIssued","effectiveDate","ref","remarks"].forEach(k=>d[k]=f.elements[k].value.trim());
+  const e=$("#terr");const fail=m=>{e.textContent=m;e.hidden=false;};
+  if(!d.personnelId||!d.to)return fail("Choose the officer from the name suggestions, and where they are going.");
+  const p=byId(d.personnelId);if(!p||!can("recordTransfer",p))return fail("That officer is outside your area of access.");
+  const prev=id?S.transfers.find(x=>x.id===id):null;
+  if(!can("effectTransfer"))d.status=prev?prev.status:"Pending";
+  if(!prev)d.requestedBy=S.me.id;
+  const ops=[{col:"transfers",id:id||newId(),data:{...(prev||{}),...d},before:prev}];
+  if(d.status==="Effected"&&(!prev||prev.status!=="Effected")){const po=transferPersonOp(d);if(po)ops.push(po);}
+  try{const r=await commit(id?"Edited transfer":"Recorded transfer",`${pLabel(p)}: ${d.from||"—"} to ${d.to} (${d.status})`,ops);
+    closeSheet();toast(r==="pending"?PENDING_MSG:d.status==="Effected"?"Transfer saved and station updated":"Transfer saved");}catch(err){writeFail(err);}
+}
+
+/* ---------- users & activity (administrator) ---------- */
+function vUsers(){
+  if(!can("users"))return go("dashboard");
+  const adm=isAdmin();
+  const all=S.users.filter(u=>adm||manageable(u));const nP=all.filter(u=>u.role==="personnel").length;
+  const rows=all.filter(u=>S.uf==="personnel"?u.role==="personnel":u.role!=="personnel").sort((a,b)=>Object.keys(ROLES).indexOf(a.role)-Object.keys(ROLES).indexOf(b.role)||(a.name||"").localeCompare(b.name||""));
+  const pendingNew=S.requests.filter(r=>r.status==="pending"&&(adm||r.by===S.me.id)).flatMap(r=>(r.ops||[]).filter(o=>o.col==="profiles"&&o.data&&!o.before).map(o=>({...o.data,id:o.id,username:o.username,_by:r.byName})));
+  const rowBtns=u=>u.id===S.me.id?`<button class="btn sm" data-act="editUser" data-id="${esc(u.id)}">Manage</button>`:`<span style="display:inline-flex;gap:6px"><button class="btn sm" data-act="editUser" data-id="${esc(u.id)}">Manage</button><button class="btn sm danger" data-act="delUser" data-id="${esc(u.id)}">Delete</button></span>`;
+  $("#main").innerHTML=header(adm?"Administration":scopeLabel(S.me),adm?"Users & access":"My users",`<button class="btn primary" data-act="addUser">${I.plus}Add user</button>`)+`
+  ${adm?"":`<p class="muted" style="margin:0;max-width:70ch">You can create logins for department heads and view-only staff at your stations. New logins and changes take effect after the regional administrator approves them.</p>`}
+  <div class="segs" role="group" aria-label="Filter users"><button data-uf="staff" aria-pressed="${S.uf==="staff"}">Staff logins (${all.length-nP})</button><button data-uf="personnel" aria-pressed="${S.uf==="personnel"}">Personnel accounts (${nP})</button></div>
+  ${S.uf==="personnel"?`<p class="muted" style="margin:0;max-width:70ch">Officers activate their own account from the sign-in page with their service number, date of birth and phone number on record. You can disable or delete an account here.</p>`:""}
+  <div class="tablewrap"><table><thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Access to</th><th>Last sign-in</th><th>Status</th><th></th></tr></thead><tbody>
+  ${rows.map(u=>`<tr><td><b>${esc(u.name)}</b>${u.id===S.me.id?" "+chip("You",""):""}${adm&&u.manager?`<br><small class="muted">Managed by ${esc(S.users.find(x=>x.id===u.manager)?.name||u.manager)}</small>`:""}</td><td class="mono">${esc(u.username)}</td><td>${chip(ROLES[u.role]?.label||u.role,ROLE_TONE[u.role])}</td><td style="max-width:260px">${esc(scopeLabel(u))}</td><td class="num">${u.lastLogin?fmtT(u.lastLogin):'<span class="muted">Never</span>'}</td><td>${u.active===false?chip("Disabled","bad"):u.mustChange?chip("New password due","warn"):chip("Active","ok")}${pendingOn("profiles",u.id).length?" "+chip("Change awaiting approval","warn"):""}</td><td>${rowBtns(u)}</td></tr>`).join("")}
+  ${pendingNew.map(u=>`<tr><td><b>${esc(u.name)}</b><br><small class="muted">Requested by ${esc(u._by)}</small></td><td class="mono">${esc(u.username)}</td><td>${chip(ROLES[u.role]?.label||u.role,ROLE_TONE[u.role])}</td><td>${esc(scopeLabel(u))}</td><td class="muted">—</td><td>${chip("Awaiting approval","warn")}</td><td></td></tr>`).join("")}
+  ${!rows.length&&!pendingNew.length?`<tr><td colspan="7" class="muted">No users yet. Use Add user to create a login.</td></tr>`:""}
+  </tbody></table></div>
+  <section class="panel"><h2>What each role can do</h2><dl class="dl">${Object.entries(ROLES).map(([k,r])=>`<div><dt>${esc(r.label)}</dt><dd style="font-size:14px">${esc(r.desc)}</dd></div>`).join("")}</dl>
+    <p class="muted" style="font-size:13.5px;margin:14px 0 0">Every change made by anyone other than the regional administrator waits in the administrator's Approvals queue until it is approved.</p></section>
+  ${adm?`<section class="panel"><h2>Activity log <small id="auditNote">Last 14 days</small></h2>
+    <div class="toolbar" style="margin-bottom:10px"><select class="f" id="auditUser" aria-label="Filter by user"><option value="">Everyone</option>${S.users.map(u=>`<option value="${esc(u.id)}">${esc(u.name)}</option>`).join("")}</select><button class="btn sm" data-act="loadAudit">Refresh</button></div>
+    <div id="auditList"><p class="empty">Loading…</p></div></section>`:""}`;
+  if(adm)loadAudit();
+}
+async function loadAudit(){
+  try{
+    const since=new Date(Date.now()-14*864e5).toISOString();
+    const rows=chk(await sb.from("audit").select("at,data").gte("at",since).order("at",{ascending:false}).limit(1500));
+    S.audit=(rows||[]).map(x=>({...x.data,t:x.at}));renderAudit();
+  }catch(e){const el=$("#auditList");if(el)el.innerHTML=`<p class="err">Could not load the activity log. Try Refresh.</p>`;}
+}
+function renderAudit(){
+  const el=$("#auditList");if(!el)return;const u=$("#auditUser")?.value||"";
+  const rows=(S.audit||[]).filter(e=>!u||e.u===u).slice(0,300);
+  el.innerHTML=rows.length?`<div class="tablewrap" style="border:0"><table><thead><tr><th>When</th><th>Who</th><th>Action</th><th>Details</th></tr></thead><tbody>${rows.map(e=>`<tr><td class="num" style="white-space:nowrap">${fmtT(e.t)}</td><td>${esc(e.n)}<br><small class="muted">${esc(ROLES[e.r]?.label||"")}</small></td><td>${esc(e.a)}</td><td>${esc(e.d)}</td></tr>`).join("")}</tbody></table></div>`:`<p class="empty">No activity recorded yet.</p>`;
+}
+function openUserForm(id){
+  const adm=isAdmin();
+  const u=id?S.users.find(x=>x.id===id):{role:adm?"district":"dept",stations:adm?[]:[...(S.me.stations||[])],units:[],active:true};
+  if(id&&!manageable(u))return toast("You cannot manage this user.");
+  const self=id===S.me.id;
+  const roleKeys=adm?Object.keys(ROLES):DISTRICT_CAN_CREATE;
+  const stList=adm?S.lists.stations:myStations();
+  const checks=(name,arr,sel)=>`<div class="checks">${arr.map(x=>`<label><input type="checkbox" name="${name}" value="${esc(x)}" ${sel.includes(x)?"checked":""}>${esc(x)}</label>`).join("")}</div>`;
+  const body=`<form id="uform" novalidate style="display:flex;flex-direction:column;gap:14px">
+  ${adm?"":`<div class="banner info"><p>This login takes effect after the regional administrator approves it.</p></div>`}
+  <fieldset><legend>Account</legend>
+    <div class="fld wide"><label for="u_pl">Personnel record</label>${personPicker("u_pl","personnelId",u.personnelId||"",adm?S.personnel:people(),"Type the officer's name to link their record (optional)")}</div>
+    <div class="fld wide"><label for="u_name">Full name and rank <span class="req">*</span></label><input id="u_name" name="name" value="${esc(u.name)}" placeholder="e.g. STN.O I Abdulai Mahama"></div>
+    <div class="fld"><label for="u_id">Username <span class="req">*</span></label><input id="u_id" name="uid" value="${esc(id?u.username:"")}" ${id?"readonly":""} autocapitalize="none" placeholder="e.g. ops.jirapa"></div>
+    <div class="fld"><label for="u_active">Status</label><select id="u_active" name="active" ${self?"disabled":""}><option value="1" ${u.active!==false?"selected":""}>Active</option><option value="0" ${u.active===false?"selected":""}>Disabled</option></select></div>
+    <div class="fld wide"><label for="u_pw">${id?"Reset password":"Temporary password"} ${id?"":'<span class="req">*</span>'}</label><input id="u_pw" name="pw" type="text" autocomplete="off" placeholder="${id?"Leave blank to keep the current password":"At least 8 characters, letters and numbers"}"><span class="hint">The user must choose a new password the first time they sign in with it.</span></div>
+  </fieldset>
+  <fieldset><legend>Role</legend><div class="roles">${roleKeys.map(k=>`<label class="rolepick"><input type="radio" name="role" value="${k}" ${u.role===k?"checked":""} ${self&&k!=="admin"?"disabled":""}><span><b>${esc(ROLES[k].label)}</b><small>${esc(ROLES[k].desc)}</small></span></label>`).join("")}</div></fieldset>
+  <fieldset id="u_st"><legend>Stations</legend><p class="scope-note wide" id="u_st_note" style="margin:0"></p>${checks("stations",stList,u.stations||[])}</fieldset>
+  <fieldset id="u_un"><legend>Units</legend><p class="scope-note wide" style="margin:0">Tick the units this department head is responsible for.</p>${checks("units",S.lists.units,u.units||[])}</fieldset>
+  <p class="err" id="uerr" hidden></p></form>`;
+  openSheet(id?"Manage "+u.name:"New user",body,`${id&&!self?`<button class="btn danger" data-act="delUser" data-id="${esc(id)}">Delete user</button><span class="spacer"></span>`:""}<button class="btn" data-close>Cancel</button><button class="btn primary" data-act="saveUser" data-id="${esc(id||"")}">${adm?"Save user":"Send for approval"}</button>`,"userForm",id);
+  const sync=()=>{const r=($("#uform").querySelector('input[name="role"]:checked')||{}).value;
+    $("#u_st").hidden=r==="admin"||r==="hr"||r==="personnel";$("#u_un").hidden=r!=="dept";
+    $("#u_st_note").textContent=r==="district"?"Tick the stations this commander is responsible for.":adm?"Optional. Leave all unticked for the whole region.":"Tick at least one of your stations.";};
+  $("#uform").addEventListener("change",sync);sync();
+}
+async function saveUser(id){
+  const f=$("#uform"),err=$("#uerr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  const adm=isAdmin();
+  const prev=id?S.users.find(x=>x.id===id):null;
+  const name=f.elements.name.value.trim(),username=prev?prev.username:uname(f.elements.uid.value),pw=f.elements.pw.value;
+  const role=(f.querySelector('input[name="role"]:checked')||{}).value;
+  let stations=[...f.querySelectorAll('input[name="stations"]:checked')].map(x=>x.value);
+  const units=[...f.querySelectorAll('input[name="units"]:checked')].map(x=>x.value);
+  const active=id===S.me.id?true:f.elements.active.value==="1";
+  if(!name||!username)return fail("Enter a name and a username (letters, numbers, dots, hyphens).");
+  const pendingNames=S.requests.filter(r=>r.status==="pending").flatMap(r=>(r.ops||[]).filter(o=>o.col==="profiles"&&o.data&&!o.before).map(o=>o.username));
+  if(!id&&(S.users.some(x=>x.username===username)||pendingNames.includes(username)))return fail("That username is already taken or awaiting approval.");
+  if(!role)return fail("Choose a role.");
+  if(!adm&&!DISTRICT_CAN_CREATE.includes(role))return fail("You can create department heads, view-only users and personnel logins.");
+  if(role==="admin"||role==="hr"||role==="personnel")stations=[];
+  if(role==="district"&&!stations.length)return fail("Tick at least one station for this district commander.");
+  if(role==="dept"&&!units.length)return fail("Tick at least one unit for this department head.");
+  if(!adm&&role!=="personnel"){if(!stations.length)return fail("Tick at least one of your stations.");if(stations.some(s=>!(S.me.stations||[]).includes(s)))return fail("You can only give access to your own stations.");}
+  if(!id&&!pw)return fail("Set a temporary password.");
+  if(pw){const pp=pwProblem(pw);if(pp)return fail(pp);}
+  const admins=S.users.filter(x=>x.role==="admin"&&x.active!==false);
+  if(prev&&prev.role==="admin"&&(role!=="admin"||!active)&&admins.length<=1)return fail("Keep at least one active administrator.");
+  const linkId=f.elements.personnelId.value||"";
+  if(role==="personnel"&&!linkId)return fail("Link a personnel record for a Personnel login.");
+  const rec={...(prev||{createdAt:new Date().toISOString()}),personnelId:linkId,name,role,stations:role==="admin"||role==="hr"||role==="personnel"?[]:stations,units:role==="dept"?units:[],active};
+  delete rec.id;delete rec.username;
+  if(!prev&&!adm)rec.manager=S.me.id;
+  if(pw)rec.mustChange=true;
+  let uid=id;
+  if(!id){try{uid=await createAuthUser(username,pw);}catch(e){if(e&&e.code==="taken")return fail("That username is already taken.");return fail("Could not create the login: "+(e.message||e));}}
+  const ops=[{col:"profiles",id:uid,username,data:rec,before:prev}];
+  if(id&&pw)ops.push({col:"password",id:uid,pw,username});
+  const detail=`${name} (${username}) as ${ROLES[role].label}, access to ${scopeLabel(rec)}${pw&&id?", password reset":""}${prev&&prev.active!==false&&!active?", disabled":""}`;
+  try{const r=await commit(id?"Updated user":"Created user",detail,ops);
+    closeSheet();toast(r==="pending"?PENDING_MSG:id?"User updated":"User created. Give them the username and temporary password.");}catch(e){writeFail(e);}
+}
+async function createAuthUser(username,pw){
+  const t=await sb.rpc("username_taken",{p_username:username});if(t.data)throw {code:"taken"};
+  const r=await newClient().auth.signUp({email:emailOf(username),password:pw});
+  if(r.error){if(/registered|exists/i.test(r.error.message))throw {code:"taken"};throw r.error;}
+  if(!r.data.user||(r.data.user.identities&&r.data.user.identities.length===0))throw {code:"taken"};
+  return r.data.user.id;
+}
+function openPwForm(forced){
+  const body=`<form id="pwform" novalidate style="display:flex;flex-direction:column;gap:14px"><fieldset>
+    ${forced?`<p class="wide" style="margin:0">Your password was set by the administrator. Choose your own password to continue.</p>`:""}
+    <div class="fld wide"><label for="pw_old">Current password</label><input id="pw_old" type="password" autocomplete="current-password"></div>
+    <div class="fld"><label for="pw_new">New password</label><input id="pw_new" type="password" autocomplete="new-password"><span class="hint">At least 8 characters, letters and numbers.</span></div>
+    <div class="fld"><label for="pw_new2">Confirm new password</label><input id="pw_new2" type="password" autocomplete="new-password"></div>
+  </fieldset><p class="err" id="pwerr" hidden></p></form>`;
+  openSheet(forced?"Choose your password":"Change password",body,`${forced?`<button class="btn" data-act="signOut">Sign out</button><span class="spacer"></span>`:`<button class="btn" data-close>Cancel</button>`}<button class="btn primary" data-act="savePw">Save password</button>`,"pw",null,forced);
+}
+async function savePw(){
+  const err=$("#pwerr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  const o=$("#pw_old").value,n=$("#pw_new").value,n2=$("#pw_new2").value;
+  const pp=pwProblem(n);if(pp)return fail(pp);if(n!==n2)return fail("The new passwords do not match.");if(n===o)return fail("Choose a password different from the current one.");
+  const chkOld=await sb.auth.signInWithPassword({email:emailOf(S.me.username),password:o});
+  if(chkOld.error)return fail("The current password is incorrect.");
+  const r=await sb.auth.updateUser({password:n});if(r.error)return fail("Could not change the password: "+r.error.message);
+  await sb.rpc("touch_me",{p_clear_must_change:true});S.me.mustChange=false;await load("profiles");
+  logAct("Changed own password","");closeSheet(true);toast("Password changed");
+}
+/* ---------- attachments (scans, photos, PDFs) ---------- */
+const MAX_FILE=15*1024*1024;
+const canUpload=()=>!!(S.me&&S.me.role!=="viewer");
+async function uploadOne(f){
+  const safe=(f.name||"file").replace(/[^\w.\-]+/g,"_").slice(-80);
+  const path=`${new Date().getFullYear()}/${newId()}-${safe}`;
+  chk(await sb.storage.from("files").upload(path,f,{contentType:f.type||undefined,upsert:false}));
+  return path;
+}
+S.urls={};
+async function hydrate(){
+  if(!sb||!S.me)return;
+  const els=[...document.querySelectorAll("[data-path]:not([data-ok])")];if(!els.length)return;
+  const need=[...new Set(els.map(e=>e.dataset.path))].filter(p=>!S.urls[p]||S.urls[p].exp<Date.now());
+  if(need.length){try{const d=chk(await sb.storage.from("files").createSignedUrls(need,3600));(d||[]).forEach(x=>{if(x.signedUrl)S.urls[x.path]={u:x.signedUrl,exp:Date.now()+3300e3};});}catch(e){}}
+  els.forEach(e=>{const u=S.urls[e.dataset.path];if(!u)return;e.dataset.ok="1";if(e.tagName==="IMG")e.src=u.u;else e.href=u.u;});
+}
+const isImg=a=>/^image\//.test(a.type||"");
+function attView(list){
+  if(!list||!list.length)return "";
+  return `<div class="atts">${list.map(a=>`<a class="att" data-path="${esc(a.id)}" href="#" target="_blank" rel="noopener">${isImg(a)?`<img data-path="${esc(a.id)}" alt="">`:`<span class="attic">${a.type==="application/pdf"?"PDF":"FILE"}</span>`}<span class="attn">${esc(a.cat?a.cat+" · ":"")}${esc(a.name||"Attachment")}</span></a>`).join("")}</div>`;
+}
+function attEdit(key){
+  const list=S.att[key]||[];
+  return `<div class="atts">${list.map((a,i)=>`<span class="att">${isImg(a)?`<img data-path="${esc(a.id)}" alt="">`:`<span class="attic">${a.type==="application/pdf"?"PDF":"FILE"}</span>`}<span class="attn">${esc(a.name)}</span><button type="button" class="btn sm ghost" data-act="unattach" data-key="${esc(key)}" data-i="${i}" aria-label="Remove ${esc(a.name)}">${I.close}</button></span>`).join("")}</div>`;
+}
+function attachField(key,label){
+  S.att[key]=S.att[key]||[];
+  return `<div class="fld wide"><label>${esc(label||"Attachments")}</label><div id="att_${esc(key)}">${attEdit(key)}</div>
+    ${canUpload()?`<div><button type="button" class="btn sm" data-act="attach" data-key="${esc(key)}">${I.clip}Attach scan, photo or PDF</button></div><span class="hint">Up to 15 MB each. On iPhone, choose Take Photo, Photo Library, or Scan Documents from Files.</span>`:`<span class="hint">Your login cannot attach files.</span>`}</div>`;
+}
+async function uploadFiles(key,files){
+  const box=$("#att_"+key);
+  for(const f of files){
+    if(f.size>MAX_FILE){toast(f.name+" is larger than 15 MB.");continue;}
+    if(box)box.insertAdjacentHTML("beforeend",`<p class="muted" data-up>Uploading ${esc(f.name)}…</p>`);
+    try{const path=await uploadOne(f);(S.att[key]=S.att[key]||[]).push({id:path,name:f.name,type:f.type||"",size:f.size});}
+    catch(e){toast("Could not upload "+f.name+". Try a smaller file or a JPEG/PDF.");}
+    const b=$("#att_"+key);if(b)b.innerHTML=attEdit(key);
+  }
+}
+
+/* ---------- documents on a personnel record ---------- */
+const DOC_CATS=["Appointment letter","Promotion letter","Posting / transfer order","Academic certificate","Professional certificate","Ghana Card","Birth certificate","Medical report","Leave letter","Query / disciplinary","Commendation","Other"];
+const canDocs=p=>can("editPerson",p)||(S.me&&S.me.personnelId===p.id);
+function docsHTML(p){
+  const docs=(p.documents||[]).slice().sort((a,b)=>(b.at||"").localeCompare(a.at||""));
+  return `<section class="panel"><h2>Documents <small>${docs.length} on file</small>${canDocs(p)?`<button class="btn sm" data-act="addDoc" data-pid="${esc(p.id)}">${I.clip}Add document</button>`:""}</h2>
+    ${docs.length?`${attView(docs)}<ul class="hist" style="margin-top:10px">${docs.map(d=>`<li><span><b>${esc(d.cat||"Document")}</b> · ${esc(d.name||"")}</span><span class="muted">${d.at?fmtT(d.at):""}${d.byName?" · "+esc(d.byName):""}${can("editPerson",p)?` <button class="btn sm ghost" data-act="rmDoc" data-pid="${esc(p.id)}" data-id="${esc(d.id)}">Remove</button>`:""}</span></li>`).join("")}</ul>`:`<p class="empty">No scanned documents yet.</p>`}</section>`;
+}
+function openDocForm(pid){
+  const p=byId(pid);if(!p||!canDocs(p))return;
+  S.att.doc=[];
+  const body=`<form id="dform" novalidate style="display:flex;flex-direction:column;gap:14px"><fieldset>
+    <div class="fld wide"><label>Officer</label><div><b>${esc(pLabel(p))}</b></div></div>
+    <div class="fld"><label for="d_cat">Document type</label><select id="d_cat" name="cat">${optList(DOC_CATS,"Appointment letter")}</select></div>
+    <div class="fld"><label for="d_name">Title / description</label><input id="d_name" name="title" placeholder="e.g. Promotion to ASO, 2024"></div>
+    ${attachField("doc","Scanned pages or file")}
+  </fieldset>${isAdmin()?"":`<div class="banner info"><p>The document is added to the record after the regional administrator approves it.</p></div>`}<p class="err" id="derr" hidden></p></form>`;
+  openSheet("Add document",body,`<button class="btn" data-close>Cancel</button><button class="btn primary" data-act="saveDoc" data-pid="${esc(pid)}">${isAdmin()?"Add to record":"Send for approval"}</button>`,"doc",pid);
+}
+async function saveDoc(pid){
+  const p=byId(pid),f=$("#dform"),err=$("#derr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  const files=S.att.doc||[];if(!files.length)return fail("Attach at least one scan or file.");
+  const cat=f.elements.cat.value,title=f.elements.title.value.trim();
+  const add=files.map((a,i)=>({id:a.id,name:title?(files.length>1?title+" ("+(i+1)+")":title):a.name,type:a.type,cat,at:new Date().toISOString(),by:S.me.id,byName:S.me.name}));
+  const upd={...p,documents:[...(p.documents||[]),...add]};
+  try{const r=await commit("Added document",`${cat} for ${pLabel(p)}`,[{col:"personnel",id:pid,data:upd,before:p}]);S.att.doc=[];closeSheet(true);toast(r==="pending"?PENDING_MSG:"Document added");if(S.view==="me")renderAll();}catch(e){writeFail(e);}
+}
+
+/* ---------- my record (self-service) ---------- */
+const SELF_FIELDS=[["phone","Phone","tel"],["altPhone","Alternative phone","tel"],["email","Email","email"],["maritalStatus","Marital status","sel:MARITAL"],["address","Residential address / digital address","textarea"],["nokName","Next of kin name","text"],["nokRelation","Next of kin relationship","text"],["nokPhone","Next of kin phone","tel"],["qualifications","Academic & professional qualifications","textarea"],["courses","Service courses attended","textarea"]];
+function vMe(){
+  const p=byId(S.me.personnelId);
+  if(!p){$("#main").innerHTML=header("My record","Record not found","")+`<div class="panel"><p>Your personnel record could not be found. Contact HR.</p></div>`;return;}
+  const myCases=S.cases.filter(c=>c.personnelId===p.id&&c.status==="open").length;
+  $("#main").innerHTML=header("My record",(p.rank?p.rank+" ":"")+shortName(p),`<button class="btn" data-act="selfEdit">${I.edit}Update my details</button><button class="btn" data-act="addDoc" data-pid="${esc(p.id)}">${I.clip}Add document</button><button class="btn primary" data-act="newCase">${I.plus}New request</button>`)+`
+  ${myCases?`<div class="banner"><p>You have ${myCases} open request${myCases===1?"":"s"}.</p><button class="btn sm" data-go="cases">View</button></div>`:""}
+  <div style="display:flex;flex-direction:column;gap:14px;max-width:820px">${profileHTML(p)}</div>`;
+}
+function openSelfForm(){
+  const p=byId(S.me.personnelId);if(!p)return;
+  const body=`<form id="sform" novalidate style="display:flex;flex-direction:column;gap:14px">
+    <div class="banner info"><p>Changes to your record are checked and approved by the regional administrator before they appear. For changes to rank, station, dates or other service details, send a <b>Correction of personal records</b> request with supporting documents.</p></div>
+    <fieldset>${SELF_FIELDS.map(fd=>field(fd,p[fd[0]])).join("")}</fieldset><p class="err" id="serr" hidden></p></form>`;
+  openSheet("Update my details",body,`<button class="btn" data-close>Cancel</button><button class="btn primary" data-act="saveSelf">Send for approval</button>`,"self");
+}
+async function saveSelf(){
+  const p=byId(S.me.personnelId),f=$("#sform");const upd={...p};
+  SELF_FIELDS.forEach(([k])=>{const el=f.elements[k];if(el)upd[k]=el.value.trim();});
+  if(SELF_FIELDS.every(([k])=>(upd[k]||"")===(p[k]||"")))return toast("You have not changed anything.");
+  try{const r=await commit("Updated own details",pLabel(p),[{col:"personnel",id:p.id,data:upd,before:p}]);closeSheet(true);toast(r==="pending"?PENDING_MSG:"Details updated");}catch(e){writeFail(e);}
+}
+
+/* ---------- requests from personnel (routed cases) ---------- */
+const CASE_TYPES=[
+  ["transfer","Transfer request","hr"],["leave","Leave request","hr"],
+  ["document","Document request (letter, certificate, record of service)","unit:Administration"],
+  ["promotion","Promotion / upgrading","hr"],["records","Correction of personal records","hr"],
+  ["welfare","Welfare / complaint","unit:Welfare"],["other","Other","admin"]];
+const caseType=k=>CASE_TYPES.find(x=>x[0]===k)||CASE_TYPES[CASE_TYPES.length-1];
+function tgt(s){if(!s)return null;if(typeof s==="object")return s;if(s==="hr")return {kind:"hr"};if(s==="admin")return {kind:"admin"};const i=s.indexOf(":");const k=s.slice(0,i),v=s.slice(i+1);
+  return k==="unit"?{kind:"unit",unit:v}:k==="district"?{kind:"district",station:v}:k==="user"?{kind:"user",id:v}:null;}
+const tgtKey=a=>!a?"":a.kind==="unit"?"unit:"+a.unit:a.kind==="district"?"district:"+a.station:a.kind==="user"?"user:"+a.id:a.kind;
+function tgtLabel(a){if(!a)return "—";if(a.kind==="hr")return "HR Officer";if(a.kind==="admin")return "Regional administrator";if(a.kind==="district")return "District Fire Commander, "+a.station;if(a.kind==="unit")return "Head of "+a.unit;if(a.kind==="user"){const u=S.users.find(x=>x.id===a.id);return u?u.name:a.id;}return "—";}
+function matches(u,a){
+  if(!u||!a||u.active===false)return false;
+  if(a.kind==="hr")return u.role==="hr";if(a.kind==="admin")return u.role==="admin";
+  if(a.kind==="district")return u.role==="district"&&(u.stations||[]).includes(a.station);
+  if(a.kind==="unit")return u.role==="dept"&&(u.units||[]).includes(a.unit);
+  if(a.kind==="user")return u.id===a.id;return false;
+}
+const isMine=a=>matches(S.me,a);
+const hasHolder=a=>S.users.some(u=>matches(u,a));
+function bossFor(p){
+  if(!p)return hrOrAdmin();
+  const d={kind:"district",station:p.station};if(p.station&&hasHolder(d))return d;
+  const u={kind:"unit",unit:p.unit};if(p.unit&&hasHolder(u))return u;
+  return hrOrAdmin();
+}
+function hrOrAdmin(){return hasHolder({kind:"hr"})?{kind:"hr"}:{kind:"admin"};}
+function handlerFor(type){let a=tgt(caseType(type)[2]);if(a.kind==="unit"&&!hasHolder(a))a=hrOrAdmin();if(a.kind==="hr"&&!hasHolder(a))a={kind:"admin"};return a;}
+function canActCase(c){return !!S.me&&c.status==="open"&&(isMine(c.assignee)||S.me.role==="admin"||S.me.role==="hr");}
+function canSeeCase(c){
+  const m=S.me;if(!m)return false;if(m.role==="admin"||m.role==="hr")return true;
+  if(c.by===m.id||(m.personnelId&&c.personnelId===m.personnelId))return true;
+  if(isMine(c.assignee)||(c.history||[]).some(h=>h.u===m.id||(h.to&&matches(m,h.to))))return true;
+  if(m.role==="district"||m.role==="dept"){const p=byId(c.personnelId);return !!p&&scopeOK(p);}
+  return false;
+}
+const CASE_TONE={open:"warn",completed:"ok",declined:"bad",withdrawn:""};
+const CASE_LABEL={open:"Open",completed:"Completed",declined:"Declined",withdrawn:"Withdrawn"};
+function nextRef(col,tag){const y=new Date().getFullYear();const n=S[col].filter(x=>(x.ref||"").includes("/"+y+"/")).length+1;return `GNFS/UWR/${tag}/${y}/${String(n).padStart(4,"0")}`;}
+function vCases(){
+  const me=S.me,vis=S.cases.filter(canSeeCase);
+  const staff=me.role!=="personnel";
+  const segs=staff?[["mine","Needs my action"],["open","All open"],["closed","Closed"],["sent","Sent by me"]]:[["sent","My requests"],["closed","Closed"]];
+  if(!segs.some(s=>s[0]===S.cf))S.cf=segs[0][0];
+  let rows=vis;
+  if(S.cf==="mine")rows=vis.filter(c=>c.status==="open"&&isMine(c.assignee));
+  else if(S.cf==="open")rows=vis.filter(c=>c.status==="open");
+  else if(S.cf==="closed")rows=vis.filter(c=>c.status!=="open");
+  else if(S.cf==="sent")rows=vis.filter(c=>c.by===me.id||(me.personnelId&&c.personnelId===me.personnelId));
+  rows.sort((a,b)=>(b.updatedAt||b.createdAt||"").localeCompare(a.updatedAt||a.createdAt||""));
+  const cnt=k=>k==="mine"?vis.filter(c=>c.status==="open"&&isMine(c.assignee)).length:"";
+  $("#main").innerHTML=header(staff?"Requests from personnel":"Sent to your commander","Requests",`<button class="btn primary" data-act="newCase">${I.plus}New request</button>`)+`
+  <p class="muted" style="margin:0;max-width:72ch">${staff?"Requests go first to the officer's immediate superior (district fire commander or unit head), who comments and forwards them to the department that handles them.":"Your request goes to your immediate superior first, then to the department that handles it. You can follow each step here."}</p>
+  <div class="segs" role="group" aria-label="Filter requests">${segs.map(([k,l])=>`<button data-cf="${k}" aria-pressed="${S.cf===k}">${l}${cnt(k)?" ("+cnt(k)+")":""}</button>`).join("")}</div>
+  <div class="rowlist">${rows.length?rows.slice(0,200).map(c=>{const p=byId(c.personnelId);return `<button class="rec casebtn" data-case="${esc(c.id)}"><div class="top"><b>${esc(c.subject||caseType(c.type)[1])}</b>${chip(CASE_LABEL[c.status],CASE_TONE[c.status])}${c.status==="open"&&isMine(c.assignee)?chip("Your action","bad"):""}</div>
+    <div class="sub"><span class="mono">${esc(c.ref||"")}</span><span>${esc(caseType(c.type)[1])}</span>${staff?`<span>${esc(p?(p.rank?p.rank+" ":"")+shortName(p):c.personName||"")}</span>`:""}${c.status==="open"?`<span>With: <b>${esc(tgtLabel(c.assignee))}</b></span>`:""}<span>${fmtT(c.updatedAt||c.createdAt)}</span>${(c.attachments||[]).length?`<span>${(c.attachments||[]).length} attachment${c.attachments.length===1?"":"s"}</span>`:""}</div></button>`;}).join(""):`<div class="panel"><p class="empty">${S.cf==="mine"?"Nothing needs your action.":"No requests here."}</p></div>`}</div>`;
+}
+function openCaseForm(prefillPid){
+  const me=S.me,self=me.role==="personnel";
+  S.att.case=[];
+  const pid=self?me.personnelId:(prefillPid||me.personnelId||"");
+  const body=`<form id="cform" novalidate style="display:flex;flex-direction:column;gap:14px"><fieldset>
+    ${self?`<div class="fld wide"><label>From</label><div><b>${esc(pLabel(byId(pid)))}</b></div><input type="hidden" name="personnelId" value="${esc(pid)}"></div>`:`<div class="fld wide"><label for="c_p">On behalf of officer <span class="req">*</span></label>${personPicker("c_p","personnelId",pid)}</div>`}
+    <div class="fld wide"><label for="c_type">Type of request</label><select id="c_type" name="type">${CASE_TYPES.map(([k,l])=>`<option value="${k}">${esc(l)}</option>`).join("")}</select></div>
+    <div class="fld wide"><label for="c_sub">Subject <span class="req">*</span></label><input id="c_sub" name="subject" placeholder="e.g. Request for introductory letter"></div>
+    <div class="fld" data-for="transfer"><label for="c_to">Preferred station</label><input id="c_to" name="prefStation" list="dl_cst" autocomplete="off"><datalist id="dl_cst">${S.lists.stations.map(s=>`<option value="${esc(s)}">`).join("")}</datalist></div>
+    <div class="fld" data-for="leave"><label for="c_ls">Leave type</label><select id="c_ls" name="leaveType">${optList(LEAVE_TYPES,"Annual")}</select></div>
+    <div class="fld" data-for="leave"><label for="c_a">From</label><input id="c_a" name="start" type="date"></div>
+    <div class="fld" data-for="leave"><label for="c_b">To</label><input id="c_b" name="end" type="date"></div>
+    <div class="fld wide"><label for="c_det">Details <span class="req">*</span></label><textarea id="c_det" name="details" style="min-height:120px" placeholder="Explain what you need and why."></textarea></div>
+    ${attachField("case","Supporting documents")}
+    <p class="hint wide" id="c_route" style="margin:0"></p>
+  </fieldset><p class="err" id="cerr" hidden></p></form>`;
+  openSheet("New request",body,`<button class="btn" data-close>Cancel</button><button class="btn primary" data-act="saveCase">Send request</button>`,"caseForm");
+  const sync=()=>{const f=$("#cform");const t=f.elements.type.value;f.querySelectorAll("[data-for]").forEach(el=>el.hidden=el.dataset.for!==t);
+    const p=byId(f.elements.personnelId.value);const first=routeFirst(p,t);const h=handlerFor(t);
+    $("#c_route").innerHTML=p?`Goes to: <b>${esc(tgtLabel(first))}</b>${tgtKey(first)!==tgtKey(h)?`, then <b>${esc(tgtLabel(h))}</b>`:""}`:"";};
+  $("#cform").addEventListener("change",sync);$("#cform").addEventListener("input",e=>{if(e.target.id==="c_p")setTimeout(sync,0);});sync();
+}
+function routeFirst(p,type){let a=bossFor(p);if(isMine(a)&&S.me.role!=="personnel")a=handlerFor(type);return a;}
+async function saveCase(){
+  const f=$("#cform"),err=$("#cerr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  const g=k=>(f.elements[k]?f.elements[k].value.trim():"");
+  const p=byId(g("personnelId"));if(!p)return fail("Choose the officer from the name suggestions.");
+  const type=g("type"),subject=g("subject"),details=g("details");
+  if(!subject||!details)return fail("Fill in the subject and details.");
+  const extra={};if(type==="transfer")extra.prefStation=g("prefStation");
+  if(type==="leave"){extra.leaveType=g("leaveType");extra.start=g("start");extra.end=g("end");if(!extra.start||!extra.end||extra.end<extra.start)return fail("Give valid leave dates.");}
+  const first=routeFirst(p,type),now=new Date().toISOString();
+  const c={ref:nextRef("cases","REQ"),type,subject,details,...extra,personnelId:p.id,personName:pLabel(p),station:p.station||"",unit:p.unit||"",
+    by:S.me.id,byName:S.me.name,status:"open",assignee:first,handler:handlerFor(type),attachments:S.att.case||[],createdAt:now,updatedAt:now,
+    history:[{t:now,u:S.me.id,n:S.me.name,act:"Submitted",to:first,note:"",att:(S.att.case||[]).length}]};
+  try{await put("cases",newId(),c);logAct("Sent request",`${c.ref}: ${subject} → ${tgtLabel(first)}`);S.att.case=[];closeSheet(true);toast("Request sent to "+tgtLabel(first));S.cf=S.me.role==="personnel"?"sent":S.cf;if(S.view!=="cases")go("cases");else renderAll();}
+  catch(e){writeFail(e);}
+}
+function openCase(id,keep){
+  const c=S.cases.find(x=>x.id===id);if(!c||!canSeeCase(c)){if(!keep)toast("That request is not available.");closeSheet(true);return;}
+  const sc=keep?$("#pane .pane-body")?.scrollTop:0;
+  const p=byId(c.personnelId),act=canActCase(c),own=c.by===S.me.id||(S.me.personnelId&&c.personnelId===S.me.personnelId);
+  if(!keep)S.att.act=[];
+  const extra=c.type==="transfer"&&c.prefStation?`<div><dt>Preferred station</dt><dd>${esc(c.prefStation)}</dd></div>`:c.type==="leave"?`<div><dt>Leave</dt><dd>${esc(c.leaveType||"")} · ${fmtD(c.start)} – ${fmtD(c.end)} (${daysBetween(c.start,c.end)} days)</dd></div>`:"";
+  const targets=[c.handler,{kind:"hr"},{kind:"admin"},...S.lists.stations.map(s=>({kind:"district",station:s})),...S.lists.units.map(u=>({kind:"unit",unit:u}))].filter(a=>a&&hasHolder(a)&&tgtKey(a)!==tgtKey(c.assignee));
+  const seen=new Set();const tOpts=targets.filter(a=>{const k=tgtKey(a);if(seen.has(k))return false;seen.add(k);return true;});
+  const staffActs=act?`<section class="panel"><h2>Take action</h2><form id="aform" novalidate style="display:flex;flex-direction:column;gap:12px">
+      <div class="fld"><label for="a_note">Minute / comment</label><textarea id="a_note" name="note" placeholder="Your remarks or recommendation"></textarea></div>
+      <div class="fld"><label for="a_to">Forward to</label><select id="a_to" name="to"><option value="">Choose where to send it…</option>${tOpts.map((a,i)=>`<option value="${esc(tgtKey(a))}">${esc(tgtLabel(a))}${i===0&&tgtKey(a)===tgtKey(c.handler)?" (handles this type)":""}</option>`).join("")}<option value="pick">A specific person…</option></select></div>
+      <div class="fld" id="a_userbox" hidden><label for="a_user">Person</label><input id="a_user" list="dl_ausers" autocomplete="off" placeholder="Type a name">${usersDatalist("dl_ausers",S.users.filter(u=>u.active!==false&&u.role!=="personnel"))}</div>
+      ${attachField("act","Attach documents (e.g. the letter issued)")}
+      <div class="actions"><button type="button" class="btn primary" data-act="caseFwd" data-id="${esc(id)}">Forward</button><button type="button" class="btn" data-act="caseNote" data-id="${esc(id)}">Add comment only</button><button type="button" class="btn" data-act="caseDone" data-id="${esc(id)}">Mark completed</button><button type="button" class="btn danger" data-act="caseDecline" data-id="${esc(id)}">Decline</button></div>
+      ${c.type==="leave"&&p&&can("recordLeave",p)?`<div><button type="button" class="btn sm" data-act="caseToLeave" data-id="${esc(id)}">${I.plus}Record this as leave</button></div>`:""}
+      ${c.type==="transfer"&&p&&can("recordTransfer",p)?`<div><button type="button" class="btn sm" data-act="caseToTransfer" data-id="${esc(id)}">${I.plus}Record this as a transfer</button></div>`:""}
+    </form></section>`:"";
+  const ownActs=!act&&own&&c.status==="open"?`<section class="panel"><h2>Add information</h2><form id="aform" novalidate style="display:flex;flex-direction:column;gap:12px">
+      <div class="fld"><label for="a_note">Comment</label><textarea id="a_note" name="note"></textarea></div>${attachField("act","Attach more documents")}
+      <div class="actions"><button type="button" class="btn primary" data-act="caseNote" data-id="${esc(id)}">Add</button><button type="button" class="btn danger" data-act="caseWithdraw" data-id="${esc(id)}">Withdraw request</button></div></form></section>`:"";
+  const body=`<div class="hero" style="flex-direction:column;align-items:flex-start;gap:6px"><div class="meta" style="margin:0"><span class="mono">${esc(c.ref)}</span>${chip(CASE_LABEL[c.status],CASE_TONE[c.status])}${chip(caseType(c.type)[1],"")}</div>
+      <div class="n1" style="font-size:22px">${esc(c.subject)}</div>
+      ${c.status==="open"?`<div>Currently with <b>${esc(tgtLabel(c.assignee))}</b></div>`:""}</div>
+    <section class="panel"><dl class="dl">
+      <div><dt>Officer</dt><dd>${p?`<button class="linkish" data-open="${esc(p.id)}">${esc(pLabel(p))}</button>`:esc(c.personName||"")}</dd></div>
+      <div><dt>Sent by</dt><dd>${esc(c.byName)} · ${fmtT(c.createdAt)}</dd></div>
+      <div><dt>Station / unit</dt><dd>${esc([c.station,c.unit].filter(Boolean).join(" · ")||"—")}</dd></div>${extra}
+      <div class="wide"><dt>Details</dt><dd style="white-space:pre-wrap">${esc(c.details)}</dd></div></dl>
+      ${attView(c.attachments)}</section>
+    <section class="panel"><h2>Minutes and movement</h2><ol class="timeline">${(c.history||[]).map(h=>`<li><div><b>${esc(h.act)}</b>${h.to?` → ${esc(tgtLabel(h.to))}`:""}</div><div class="muted" style="font-size:13px">${esc(h.n)} · ${fmtT(h.t)}</div>${h.note?`<div style="white-space:pre-wrap;margin-top:4px">${esc(h.note)}</div>`:""}${h.files&&h.files.length?attView(h.files):""}</li>`).join("")}</ol></section>
+    ${staffActs}${ownActs}`;
+  openSheet(c.ref,body,"","case",id);
+  if(act)$("#a_to").addEventListener("change",e=>{$("#a_userbox").hidden=e.target.value!=="pick";});
+  if(keep&&sc)$("#pane .pane-body").scrollTop=sc;
+}
+async function caseAction(id,kind){
+  const c=S.cases.find(x=>x.id===id);if(!c)return;
+  const f=$("#aform");const note=f?f.elements.note.value.trim():"";const files=S.att.act||[];const now=new Date().toISOString();
+  const upd={...c,history:[...(c.history||[])],attachments:[...(c.attachments||[])],updatedAt:now};
+  let msg="";
+  if(kind==="fwd"){
+    let v=f.elements.to.value,to=null;
+    if(v==="pick"){const u=resolveUser($("#a_user").value);if(!u)return toast("Pick the person from the name suggestions.");to={kind:"user",id:u.id};}
+    else to=tgt(v);
+    if(!to)return toast("Choose where to forward the request.");
+    upd.assignee=to;upd.history.push({t:now,u:S.me.id,n:S.me.name,act:"Forwarded",to,note,files});msg="Forwarded to "+tgtLabel(to);
+  }else if(kind==="note"){if(!note&&!files.length)return toast("Write a comment or attach a file.");upd.history.push({t:now,u:S.me.id,n:S.me.name,act:"Comment",note,files});msg="Comment added";}
+  else if(kind==="done"){upd.status="completed";upd.history.push({t:now,u:S.me.id,n:S.me.name,act:"Completed",note,files});msg="Request marked completed";}
+  else if(kind==="decline"){if(!note)return toast("Give a reason for declining in the comment box.");upd.status="declined";upd.history.push({t:now,u:S.me.id,n:S.me.name,act:"Declined",note,files});msg="Request declined";}
+  else if(kind==="withdraw"){upd.status="withdrawn";upd.history.push({t:now,u:S.me.id,n:S.me.name,act:"Withdrawn by sender",note,files});msg="Request withdrawn";}
+  files.forEach(a=>upd.attachments.push(a));
+  try{const body=JSON.parse(JSON.stringify(upd));delete body.id;chk(await sb.rpc("case_update",{p_id:id,p_data:body}));await load("cases");logAct("Request "+kind,`${c.ref}: ${msg}`);S.att.act=[];toast(msg);openCase(id);}catch(e){writeFail(e);}
+}
+
+/* ---------- memos ---------- */
+function personOf(u){return u&&u.personnelId?byId(u.personnelId):null;}
+function memberOf(u,k){
+  if(!u)return false;if(k==="all")return true;
+  const i=k.indexOf(":");const kind=k.slice(0,i),v=k.slice(i+1);const p=personOf(u);
+  if(kind==="role")return u.role===v;
+  if(kind==="user")return u.id===v;
+  if(kind==="station")return (u.role==="district"&&(u.stations||[]).includes(v))||(p&&p.station===v);
+  if(kind==="unit")return (u.role==="dept"&&(u.units||[]).includes(v))||(p&&p.unit===v);
+  return false;
+}
+function recipLabel(k){if(k==="all")return "All staff and personnel";const i=k.indexOf(":");const kind=k.slice(0,i),v=k.slice(i+1);
+  if(kind==="role")return v==="district"?"All district fire commanders":v==="dept"?"All department / unit heads":v==="admin"?"Regional administrator":v==="hr"?"HR":(ROLES[v]?.label||v);
+  if(kind==="station")return "Everyone at "+v;if(kind==="unit")return "Everyone in "+v;if(kind==="user"){const u=S.users.find(x=>x.id===v);return u?u.name:v;}return k;}
+const memoForMe=m=>m.from===S.me.id||(m.to||[]).some(k=>memberOf(S.me,k));
+const unreadMemos=()=>S.memos.filter(m=>m.from!==S.me.id&&(m.to||[]).some(k=>memberOf(S.me,k))&&!((S.reads[S.me.id]||{})[m.id]));
+function memoGroups(){
+  const r=S.me.role,p=personOf(S.me);const g=[];
+  if(r==="admin"||r==="hr"){g.push("all","role:district","role:dept","role:hr","role:admin");S.lists.stations.forEach(s=>g.push("station:"+s));S.lists.units.forEach(u=>g.push("unit:"+u));}
+  else{g.push("role:admin","role:hr","role:district");
+    if(r==="district"){(S.me.stations||[]).forEach(s=>g.push("station:"+s));g.push("role:dept");}
+    if(r==="dept")(S.me.units||[]).forEach(u=>g.push("unit:"+u));
+    if(p&&r==="personnel"){/* officers write to their leaders, not whole groups */}
+  }
+  return [...new Set(g)];
+}
+function vMemos(){
+  const inbox=S.memos.filter(m=>m.from!==S.me.id&&(m.to||[]).some(k=>memberOf(S.me,k))),sent=S.memos.filter(m=>m.from===S.me.id);
+  const rows=(S.mf==="sent"?sent:inbox).slice().sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+  const rd=S.reads[S.me.id]||{};const un=unreadMemos().length;
+  $("#main").innerHTML=header("Internal communication","Memos",S.me.role==="viewer"?"":`<button class="btn primary" data-act="newMemo">${I.plus}New memo</button>`)+`
+  <div class="segs" role="group" aria-label="Memo folders"><button data-mf="inbox" aria-pressed="${S.mf==="inbox"}">Inbox${un?" ("+un+" unread)":""}</button><button data-mf="sent" aria-pressed="${S.mf==="sent"}">Sent</button></div>
+  <div class="rowlist">${rows.length?rows.slice(0,200).map(m=>{const unread=S.mf==="inbox"&&!rd[m.id];const nRead=Object.values(S.reads).filter(x=>x&&x[m.id]).length;return `<button class="rec casebtn ${unread?"unread":""}" data-memo="${esc(m.id)}"><div class="top">${unread?'<span class="udot" aria-label="Unread"></span>':""}<b>${esc(m.subject)}</b>${(m.attachments||[]).length?chip((m.attachments.length)+" attached",""):""}</div>
+    <div class="sub"><span class="mono">${esc(m.ref||"")}</span><span>${S.mf==="sent"?"To: "+esc((m.to||[]).map(recipLabel).join(", ")):"From: "+esc(m.fromName)}</span><span>${fmtT(m.createdAt)}</span>${S.mf==="sent"?`<span>Read by ${nRead}</span>`:""}</div></button>`;}).join(""):`<div class="panel"><p class="empty">${S.mf==="sent"?"You have not sent any memos.":"No memos yet."}</p></div>`}</div>`;
+}
+function openMemoForm(replyTo){
+  const orig=replyTo?S.memos.find(m=>m.id===replyTo):null;
+  S.att.memo=[];S.memoTo=orig?["user:"+orig.from]:[];
+  const groups=memoGroups();
+  const body=`<form id="mform" novalidate style="display:flex;flex-direction:column;gap:14px"><fieldset>
+    <div class="fld wide"><label>To <span class="req">*</span></label><div id="m_chips" class="atts"></div></div>
+    ${groups.length?`<div class="fld wide"><label for="m_grp">Add a group</label><select id="m_grp"><option value="">Choose a group…</option>${groups.map(k=>`<option value="${esc(k)}">${esc(recipLabel(k))}</option>`).join("")}</select></div>`:""}
+    <div class="fld wide"><label for="m_user">Add a person</label><input id="m_user" list="dl_musers" autocomplete="off" placeholder="Start typing a name">${usersDatalist("dl_musers",S.users.filter(u=>u.active!==false&&u.id!==S.me.id&&(S.me.role!=="personnel"||u.role!=="personnel")))}<span class="hint">Pick from the suggestions to add them.</span></div>
+    <div class="fld wide"><label for="m_sub">Subject <span class="req">*</span></label><input id="m_sub" name="subject" value="${orig?esc(/^re:/i.test(orig.subject)?orig.subject:"Re: "+orig.subject):""}"></div>
+    <div class="fld wide"><label for="m_body">Message <span class="req">*</span></label><textarea id="m_body" name="body" style="min-height:180px"></textarea></div>
+    ${attachField("memo","Attachments")}
+  </fieldset><p class="err" id="merr" hidden></p></form>`;
+  openSheet(orig?"Reply":"New memo",body,`<button class="btn" data-close>Cancel</button><button class="btn primary" data-act="sendMemo" data-reply="${esc(replyTo||"")}">Send memo</button>`,"memoForm");
+  const draw=()=>{$("#m_chips").innerHTML=S.memoTo.length?S.memoTo.map((k,i)=>`<span class="att"><span class="attn">${esc(recipLabel(k))}</span><button type="button" class="btn sm ghost" data-act="rmRecip" data-i="${i}" aria-label="Remove">${I.close}</button></span>`).join(""):'<span class="muted">No recipients yet.</span>';};
+  S.drawRecips=draw;draw();
+  const g=$("#m_grp");if(g)g.addEventListener("change",()=>{if(g.value&&!S.memoTo.includes(g.value))S.memoTo.push(g.value);g.value="";draw();});
+  $("#m_user").addEventListener("input",e=>{const u=/\[[^\]]+\]\s*$/.test(e.target.value)?resolveUser(e.target.value):null;if(u){const k="user:"+u.id;if(!S.memoTo.includes(k))S.memoTo.push(k);e.target.value="";draw();}});
+}
+async function sendMemo(replyTo){
+  const f=$("#mform"),err=$("#merr");const fail=m=>{err.textContent=m;err.hidden=false;};
+  const subject=f.elements.subject.value.trim(),body=f.elements.body.value.trim();
+  if(!S.memoTo.length)return fail("Add at least one recipient.");if(!subject||!body)return fail("Write a subject and a message.");
+  const m={ref:nextRef("memos","MEMO"),subject,body,from:S.me.id,fromName:S.me.name,fromRole:S.me.role,to:[...S.memoTo],attachments:S.att.memo||[],replyTo:replyTo||"",createdAt:new Date().toISOString()};
+  try{await put("memos",newId(),m);logAct("Sent memo",`${m.ref}: ${subject} → ${m.to.map(recipLabel).join(", ")}`);S.att.memo=[];closeSheet(true);toast("Memo sent");S.mf="sent";if(S.view==="memos")renderAll();else go("memos");}catch(e){writeFail(e);}
+}
+async function markRead(id){
+  const mine=S.reads[S.me.id]||{};if(mine[id])return;
+  S.reads[S.me.id]={...mine,[id]:new Date().toISOString()};
+  try{await sb.from("memo_reads").insert({memo_id:id});}catch(e){}
+}
+function openMemo(id){
+  const m=S.memos.find(x=>x.id===id);if(!m||!memoForMe(m))return toast("That memo is not available.");
+  if(m.from!==S.me.id)markRead(id);
+  const readers=Object.entries(S.reads).filter(([u,x])=>x&&x[id]).map(([u])=>S.users.find(x=>x.id===u)?.name||u);
+  const body=`<section class="panel memo"><div class="mono muted" style="font-size:13px">${esc(m.ref||"")}</div><h2 style="margin:6px 0 12px;text-transform:none;font-size:24px">${esc(m.subject)}</h2>
+    <dl class="dl"><div><dt>From</dt><dd>${esc(m.fromName)} · ${esc(ROLES[m.fromRole]?.label||"")}</dd></div><div><dt>Date</dt><dd>${fmtT(m.createdAt)}</dd></div><div class="wide"><dt>To</dt><dd>${esc((m.to||[]).map(recipLabel).join(", "))}</dd></div></dl>
+    <div class="memobody">${esc(m.body)}</div>${attView(m.attachments)}</section>
+    ${m.from===S.me.id?`<section class="panel"><h2>Read by <small>${readers.length}</small></h2><p style="margin:0">${readers.length?esc(readers.join(", ")):'<span class="muted">Nobody has opened it yet.</span>'}</p></section>`:""}`;
+  openSheet("Memo",body,S.me.role==="viewer"?"":`<span class="spacer"></span>${m.from!==S.me.id?`<button class="btn primary" data-act="replyMemo" data-id="${esc(id)}">Reply</button>`:""}`,"memo",id);
+  if(S.view==="memos")setTimeout(()=>{if(S.view==="memos")renderAll();},50);
+}
+function openMore(){
+  const V=views().slice(4);
+  openSheet("More",`<nav class="nav morenav">${V.map(([k,l])=>`<button data-view="${k}" ${S.view===k?'aria-current="page"':""}>${I[k]}${l}</button>`).join("")}</nav>`,"","more");
+}
+
+/* ---------- approvals (regional administrator) ---------- */
+const FIELD_LABEL=(()=>{const m={};PFORM.forEach(s=>s.f.forEach(([k,l])=>m[k]=l));Object.assign(m,{personnelId:"Officer",type:"Type",start:"Start date",end:"End date",relief:"Relieving officer",ref:"Reference",remarks:"Remarks",from:"From",to:"To",dateIssued:"Date of posting order",effectiveDate:"Effective date",name:"Name",role:"Role",stations:"Stations",units:"Units",active:"Account status",ranks:"Ranks",documents:"Documents"});m.status="Status";m.units="Units";return m;})();
+const DATE_KEYS=/^(dob|dateEnlisted|lastPromotion|start|end|effectiveDate|dateIssued)$/;
+const SKIP_KEYS=new Set(["personnelId_user","selfActivated","updatedAt","updatedBy","createdAt","salt","example","requestedBy","decidedBy","manager","lastLogin","mustChange","hash","photoId","id"]);
+function fmtVal(k,v){
+  if(v==null||v===""||(Array.isArray(v)&&!v.length))return '<span class="muted">—</span>';
+  if(Array.isArray(v))return esc(v.map(x=>x&&typeof x==="object"?(x.cat?x.cat+": ":"")+(x.name||""):x).join(", "));
+  if(k==="role")return esc(ROLES[v]?.label||v);
+  if(k==="personnelId")return esc(pLabel(byId(v)));
+  if(k==="active")return v===false?"Disabled":"Active";
+  if(DATE_KEYS.test(k))return fmtD(v);
+  return esc(String(v)).replace(/\n/g,"<br>");
+}
+function opName(o){
+  const d=o.data||o.before||{};
+  if(o.col==="personnel")return pLabel(d);
+  if(o.col==="leave")return (d.type||"")+" leave for "+pLabel(byId(d.personnelId));
+  if(o.col==="transfers")return "transfer of "+pLabel(byId(d.personnelId));
+  if(o.col==="profiles")return "login "+(d.name||"")+" ("+(o.username||"")+")";
+  if(o.col==="password"){const u=S.users.find(x=>x.id===o.id);return "password for "+(u?u.name:o.username||"");}
+  if(o.col==="settings")return "drop-down lists";
+  return o.col+" "+o.id;
+}
+function currentDoc(o){if(o.col==="settings")return S.lists;if(o.col==="profiles"||o.col==="password")return S.users.find(x=>x.id===o.id);return (S[o.col]||[]).find(x=>x.id===o.id);}
+function opDiff(o){
+  if(o.col==="password")return `<div><span class="chip info">Reset password</span> ${esc(opName(o))} <span class="muted">(to a temporary password the user must change)</span></div>`;
+  const verb=o.data==null?"Delete":o.before?"Change":"Create";
+  const cur=currentDoc(o);let warn="";
+  if(o.before&&!cur&&o.col!=="settings")warn="This record no longer exists.";
+  else if(o.before&&cur&&o.col!=="settings"&&o.col!=="profiles"&&cur.updatedAt&&o.before.updatedAt&&cur.updatedAt!==o.before.updatedAt)warn="This record has changed since the request was made. Approving replaces it with the version below.";
+  else if(!o.before&&o.data&&cur)warn="A record with this ID already exists. Approving overwrites it.";
+  let rows="";
+  if(o.data){
+    const keys=[...new Set([...Object.keys(o.before||{}),...Object.keys(o.data)])].filter(k=>!SKIP_KEYS.has(k));
+    rows=keys.filter(k=>JSON.stringify((o.before||{})[k]??"")!==JSON.stringify(o.data[k]??"")).map(k=>`<tr><td>${esc(FIELD_LABEL[k]||k)}</td>${o.before?`<td>${fmtVal(k,o.before[k])}</td>`:""}<td><b>${fmtVal(k,o.data[k])}</b></td></tr>`).join("");
+    if(o.col==="profiles"&&!o.before)rows+=`<tr><td>Password</td><td><b>Temporary password set</b></td></tr>`;
+    if((o.data.photoId||"")!==((o.before||{}).photoId||""))rows+=`<tr><td>Photo</td>${o.before?`<td class="muted">—</td>`:""}<td><b>Updated</b></td></tr>`;
+  }
+  return `<div style="display:flex;flex-direction:column;gap:6px"><div><span class="chip ${o.data==null?"bad":o.before?"info":"ok"}">${verb}</span> ${esc(opName(o))}</div>
+    ${warn?`<p class="err" style="margin:0">${esc(warn)}</p>`:""}
+    ${o.data==null?"":rows?`<div class="tablewrap"><table><thead><tr><th>Field</th>${o.before?"<th>Now</th>":""}<th>${o.before?"Proposed":"Value"}</th></tr></thead><tbody>${rows}</tbody></table></div>`:`<p class="muted" style="margin:0;font-size:13.5px">No field changes.</p>`}</div>`;
+}
+const REQ_TONE={pending:"warn",approved:"ok",rejected:"bad",withdrawn:""};
+const REQ_LABEL={pending:"Awaiting approval",approved:"Approved",rejected:"Rejected",withdrawn:"Withdrawn"};
+function reqCard(r,mode){
+  const openD=r.status==="pending"&&mode==="admin";
+  const decided=r.decidedAt?`<span>${REQ_LABEL[r.status]} ${fmtT(r.decidedAt)}${r.decidedByName?" by "+esc(r.decidedByName):""}</span>`:"";
+  return `<div class="rec" style="grid-template-columns:1fr"><div class="top"><b>${esc(r.action)}</b>${chip(REQ_LABEL[r.status]||r.status,REQ_TONE[r.status])}</div>
+    <div class="sub" style="grid-column:auto"><span>${esc(r.detail||"")}</span></div>
+    <div class="sub" style="grid-column:auto"><span>From <b>${esc(r.byName)}</b> · ${esc(ROLES[r.byRole]?.label||r.byRole)}</span><span>${fmtT(r.createdAt)}</span>${decided}</div>
+    ${r.note?`<div class="sub" style="grid-column:auto"><span>Administrator's note: ${esc(r.note)}</span></div>`:""}
+    <details ${openD?"open":""}><summary class="muted" style="cursor:pointer;font-size:13.5px">Details (${(r.ops||[]).length} change${(r.ops||[]).length===1?"":"s"})</summary><div style="display:flex;flex-direction:column;gap:12px;margin-top:10px">${(r.ops||[]).slice(0,60).map(opDiff).join("")}${(r.ops||[]).length>60?`<p class="muted">…and ${(r.ops.length-60)} more records</p>`:""}</div></details>
+    ${mode==="admin"&&r.status==="pending"?`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><input id="note_${esc(r.id)}" placeholder="Note to ${esc(r.byName)} (optional)" style="flex:1 1 220px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);padding:8px 10px;min-height:38px;font-size:15px"><button class="btn danger" data-act="rejectReq" data-id="${esc(r.id)}">Reject</button><button class="btn primary" data-act="approveReq" data-id="${esc(r.id)}">Approve</button></div>`:""}
+    ${mode==="mine"&&r.status==="pending"?`<div><button class="btn sm" data-act="withdrawReq" data-id="${esc(r.id)}">Withdraw request</button></div>`:""}
+  </div>`;
+}
+function vApprovals(){
+  if(!can("approvals"))return go("dashboard");
+  let rows=[...S.requests];if(S.af!=="all")rows=rows.filter(r=>r.status===S.af);
+  rows.sort((a,b)=>S.af==="pending"?a.createdAt.localeCompare(b.createdAt):(b.decidedAt||b.createdAt).localeCompare(a.decidedAt||a.createdAt));
+  const n=S.requests.filter(r=>r.status==="pending").length;
+  const segs=[["pending","Waiting ("+n+")"],["approved","Approved"],["rejected","Rejected"],["all","All"]];
+  const old=S.requests.filter(r=>r.status!=="pending"&&(r.decidedAt||r.createdAt)<new Date(Date.now()-60*864e5).toISOString()).length;
+  $("#main").innerHTML=header("Regional administrator","Approvals",If(old,`<button class="btn" data-act="pruneReq">Clear ${old} decided request${old===1?"":"s"} older than 60 days</button>`))+`
+  <p class="muted" style="margin:0;max-width:70ch">Changes made by HR, district commanders and department heads wait here. Nothing reaches the register until you approve it. Oldest requests are shown first.</p>
+  <div class="segs" role="group" aria-label="Filter requests">${segs.map(([k,l])=>`<button data-af="${k}" aria-pressed="${S.af===k}">${l}</button>`).join("")}</div>
+  <div class="rowlist">${rows.length?rows.slice(0,150).map(r=>reqCard(r,"admin")).join(""):`<div class="panel"><p class="empty">${S.af==="pending"?"Nothing is waiting for approval.":"No requests here."}</p></div>`}</div>`;
+}
+function vRequests(){
+  const rows=S.requests.filter(r=>r.by===S.me.id).sort((a,b)=>b.createdAt.localeCompare(a.createdAt));
+  $("#main").innerHTML=header("Sent to the regional administrator","My requests","")+`
+  <p class="muted" style="margin:0;max-width:70ch">Every change you make is sent to the regional administrator. It takes effect only after approval.</p>
+  <div class="rowlist">${rows.length?rows.slice(0,150).map(r=>reqCard(r,"mine")).join(""):`<div class="panel"><p class="empty">You have not sent any changes yet.</p></div>`}</div>`;
+}
+async function decideReq(id,approve){
+  const r=S.requests.find(x=>x.id===id);if(!r||r.status!=="pending")return;
+  const note=($("#note_"+id)||{}).value||"";
+  try{
+    if(approve)await applyOps(r.ops||[]);
+    else for(const o of (r.ops||[]))if(o.col==="profiles"&&o.data&&!o.before){await sb.rpc("admin_delete_user",{p_uid:o.id});}
+    const ops=(r.ops||[]).map(o=>{const c={...o};delete c.pw;return c;});
+    await put("requests",id,{...r,ops,status:approve?"approved":"rejected",decidedAt:new Date().toISOString(),decidedBy:S.me.id,decidedByName:S.me.name,note:note.trim()});
+    logAct(approve?"Approved request":"Rejected request",`${r.action}: ${r.detail} (from ${r.byName})${note?" — "+note:""}`);
+    toast(approve?"Approved and applied":"Rejected");
+  }catch(e){writeFail(e);}
+}
+/* ---------- settings ---------- */
+function vSettings(){
+  const L=can("lists");
+  $("#main").innerHTML=header("Configuration",L?"Settings":"My account",If(L,`<button class="btn primary" data-act="saveLists">${isAdmin()?"Save lists":"Send lists for approval"}</button>`))+`
+  <section class="panel"><h2>My account</h2><dl class="dl">
+    <div><dt>Name</dt><dd>${esc(S.me.name)}</dd></div><div><dt>Username</dt><dd class="mono">${esc(S.me.username)}</dd></div>
+    <div><dt>Role</dt><dd>${chip(ROLES[S.me.role]?.label||S.me.role,ROLE_TONE[S.me.role])}</dd></div><div><dt>Access to</dt><dd>${esc(scopeLabel(S.me))}</dd></div></dl>
+    <div class="actions" style="margin-top:14px"><button class="btn" data-act="changePw">${I.lock}Change password</button><button class="btn" data-act="signOut">Sign out</button></div></section>
+  ${L?`<p class="muted" style="margin:0;max-width:65ch">These lists fill the drop-downs across the register${isAdmin()?"":" (changes go to the regional administrator for approval)"}. Put one entry per line. Ranks run from most senior at the top to most junior, which sets the seniority order on the nominal roll.</p>
+  <div class="settings-grid">
+    <section class="panel"><h2>Ranks</h2><textarea id="s_ranks" aria-label="Ranks">${esc(S.lists.ranks.join("\n"))}</textarea></section>
+    <section class="panel"><h2>Stations</h2><textarea id="s_stations" aria-label="Stations">${esc(S.lists.stations.join("\n"))}</textarea></section>
+    <section class="panel"><h2>Units</h2><textarea id="s_units" aria-label="Units">${esc(S.lists.units.join("\n"))}</textarea></section>
+  </div>
+  <section class="panel"><h2>Records held</h2><dl class="dl">
+    <div><dt>Personnel</dt><dd class="num">${S.personnel.length}</dd></div><div><dt>Leave records</dt><dd class="num">${S.leave.length}</dd></div>
+    <div><dt>Transfers</dt><dd class="num">${S.transfers.length}</dd></div><div><dt>User accounts</dt><dd class="num">${S.users.length}</dd></div></dl></section>
+  ${isAdmin()?`<section class="panel"><h2>Backup and restore</h2><p class="muted" style="margin:0 0 12px;max-width:65ch">Download a full copy of the personnel, leave and transfer records, or load records from a backup file (for example, the copy moved from the first version of the register).</p>
+    <div class="actions"><button class="btn" data-act="backup">${I.down}Download backup</button><button class="btn" data-act="restore">${I.up}Restore from backup file</button></div><p class="muted" id="restoreProg"></p></section>`:""}`:""}`;
+}
+
+/* ---------- CSV ---------- */
+function csvCell(v){v=String(v??"");return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}
+function toCSV(rows){return [CSV_COLS.join(","),...rows.map(p=>CSV_COLS.map(c=>csvCell(p[c])).join(","))].join("\r\n");}
+function parseCSV(text){
+  const out=[];let row=[],cell="",q=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){cell+='"';i++;}else q=false;}else cell+=c;}
+    else if(c==='"')q=true;else if(c===","){row.push(cell);cell="";}
+    else if(c==="\n"||c==="\r"){if(c==="\r"&&text[i+1]==="\n")i++;row.push(cell);out.push(row);row=[];cell="";}
+    else cell+=c;}
+  if(cell||row.length){row.push(cell);out.push(row);}
+  return out.filter(r=>r.some(x=>x.trim()));
+}
+const ALIAS={"serviceno":"serviceNo","servicenumber":"serviceNo","svcno":"serviceNo","no":"serviceNo","surname":"surname","lastname":"surname","firstname":"firstName","othernames":"otherNames","othername":"otherNames","rank":"rank","gender":"gender","sex":"gender","dob":"dob","dateofbirth":"dob","dateenlisted":"dateEnlisted","dateofenlistment":"dateEnlisted","lastpromotion":"lastPromotion","dateoflastpromotion":"lastPromotion","station":"station","unit":"unit","department":"unit","appointment":"appointment","status":"status","phone":"phone","telephone":"phone","phoneno":"phone","contact":"phone","altphone":"altPhone","email":"email","ghanacard":"ghanaCard","ghanacardno":"ghanaCard","bloodgroup":"bloodGroup","maritalstatus":"maritalStatus","hometown":"hometown","regionorigin":"regionOrigin","regionoforigin":"regionOrigin","address":"address","nokname":"nokName","nextofkin":"nokName","nokrelation":"nokRelation","nokphone":"nokPhone","nextofkinphone":"nokPhone","qualifications":"qualifications","courses":"courses","notes":"notes","remarks":"notes"};
+function normDate(v){v=(v||"").trim();if(!v)return "";if(/^\d{4}-\d{2}-\d{2}$/.test(v))return v;
+  let m=/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/.exec(v);if(m)return m[3]+"-"+m[2].padStart(2,"0")+"-"+m[1].padStart(2,"0");
+  const d=new Date(v);return isNaN(d)?v:d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function openImport(){
+  if(!can("import"))return;
+  const body=`<section class="panel"><h2>Import nominal roll</h2><p style="margin:0 0 10px;max-width:65ch">In Excel, save your nominal roll as <b>CSV (Comma delimited)</b>, then choose the file here. The first row must hold column headings. Recognised headings include Service No, Rank, Surname, First Name, Other Names, Gender, Date of Birth, Date Enlisted, Station, Unit, Phone, Blood Group, Ghana Card, Next of Kin.</p>
+  <p class="muted" style="margin:0 0 14px;font-size:13.5px">Dates can be written 25/03/1988 or 1988-03-25. A row whose service number already exists updates that officer instead of creating a duplicate.</p>
+  <div class="actions"><button class="btn primary" data-act="pickCSV">${I.up}Choose CSV file</button><button class="btn" data-act="template">${I.down}Get blank template</button></div></section><div id="impOut"></div>`;
+  openSheet("Import CSV",body,"","import");
+}
+async function handleCSV(file){
+  const text=await file.text();const rows=parseCSV(text.replace(/^﻿/,""));
+  const out=$("#impOut");if(!out)return;
+  if(rows.length<2){out.innerHTML=`<p class="err">That file has no data rows. Check that it was saved as CSV with headings in the first row.</p>`;return;}
+  const map=rows[0].map(h=>ALIAS[h.toLowerCase().replace(/[^a-z]/g,"")]||null);
+  if(!map.includes("serviceNo")||!map.includes("surname")){out.innerHTML=`<p class="err">Could not find a Service No and a Surname column. Rename the headings to match the template and try again.</p>`;return;}
+  const recs=rows.slice(1).map(r=>{const o={};map.forEach((k,i)=>{if(k&&r[i]!=null&&r[i].trim())o[k]=r[i].trim();});["dob","dateEnlisted","lastPromotion"].forEach(k=>{if(o[k])o[k]=normDate(o[k]);});if(o.gender){const g=o.gender[0].toUpperCase();o.gender=g==="M"?"Male":g==="F"?"Female":o.gender;}if(o.bloodGroup)o.bloodGroup=o.bloodGroup.toUpperCase().replace(/\s|VE$/g,"").replace("POS","+").replace("NEG","-");return o;}).filter(o=>o.serviceNo&&o.surname);
+  const upd=recs.filter(o=>S.personnel.some(p=>(p.serviceNo||"").toLowerCase()===o.serviceNo.toLowerCase())).length;
+  S.pendingImport=recs;
+  out.innerHTML=`<section class="panel"><h2>Ready to import</h2><p style="margin:0 0 12px"><b>${recs.length}</b> officers found: ${recs.length-upd} new, ${upd} updates to existing records.${rows.length-1-recs.length?` ${rows.length-1-recs.length} rows skipped for missing service number or surname.`:""}</p>
+  <div class="tablewrap"><table><thead><tr><th>Service no.</th><th>Rank</th><th>Name</th><th>Station</th></tr></thead><tbody>${recs.slice(0,6).map(o=>`<tr><td class="mono">${esc(o.serviceNo)}</td><td class="rank">${esc(o.rank||"")}</td><td>${esc(shortName(o))}</td><td>${esc(o.station||"")}</td></tr>`).join("")}</tbody></table></div>
+  ${recs.length>6?`<p class="muted" style="font-size:13px">…and ${recs.length-6} more</p>`:""}<div class="actions" style="margin-top:12px"><button class="btn primary" data-act="runImport">${isAdmin()?"Import":"Send for approval:"} ${recs.length} records</button></div><p id="impProg" class="muted"></p></section>`;
+}
+async function runImport(btn){
+  const recs=S.pendingImport||[];btn.disabled=true;const prog=$("#impProg");
+  const ops=recs.map(o=>{const ex=S.personnel.find(p=>(p.serviceNo||"").toLowerCase()===o.serviceNo.toLowerCase());
+    const id=ex?ex.id:(sid(o.serviceNo)||newId());return {col:"personnel",id,data:{...(ex||{status:"Active",createdAt:new Date().toISOString()}),...o},before:ex||null};});
+  const size=isAdmin()?5:40;let done=0;
+  try{
+    if(isAdmin()){for(let i=0;i<ops.length;i+=size){await Promise.all(ops.slice(i,i+size).map(o=>applyOps([o])));done=Math.min(ops.length,i+size);if(prog)prog.textContent=`Imported ${done} of ${ops.length}…`;}
+      logAct("Imported nominal roll",`${ops.length} records from CSV`);toast(`Imported ${ops.length} records`);}
+    else{const parts=Math.ceil(ops.length/size);for(let i=0;i<parts;i++){await commit(`Imported nominal roll${parts>1?` (part ${i+1} of ${parts})`:""}`,`${Math.min(size,ops.length-i*size)} records from CSV`,ops.slice(i*size,(i+1)*size));if(prog)prog.textContent=`Sent ${i+1} of ${parts} parts…`;}
+      toast(PENDING_MSG);}
+  }catch(e){writeFail(e);}
+  S.pendingImport=null;closeSheet(true);
+}
+async function saveFile(name,text){
+  const b=new Blob(["﻿"+text],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");
+  a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);toast("Downloaded "+name);
+}
+/* ---------- events ---------- */
+document.addEventListener("click",async e=>{
+  const t=e.target.closest("[data-view],[data-open],[data-act],[data-close],[data-go],[data-lf],[data-tf],[data-af],[data-uf],[data-cf],[data-mf],[data-case],[data-memo]");if(!t||!S.me)return;
+  if(t.dataset.view)return go(t.dataset.view);
+  if(t.hasAttribute("data-close")&&!t.dataset.act)return closeSheet();
+  if(t.dataset.go){if(t.dataset.sort){S.f.sort=t.dataset.sort;S.f.status="inStrength";}return go(t.dataset.go);}
+  if(t.dataset.lf){S.lf=t.dataset.lf;return vLeave();}
+  if(t.dataset.tf){S.tf=t.dataset.tf;return vTransfers();}
+  if(t.dataset.af){S.af=t.dataset.af;return vApprovals();}
+  if(t.dataset.uf){S.uf=t.dataset.uf;return vUsers();}
+  if(t.dataset.cf){S.cf=t.dataset.cf;return vCases();}
+  if(t.dataset.mf){S.mf=t.dataset.mf;return vMemos();}
+  if(t.dataset.open&&!t.dataset.act)return openProfile(t.dataset.open);
+  if(t.dataset.case&&!t.dataset.act)return openCase(t.dataset.case);
+  if(t.dataset.memo&&!t.dataset.act)return openMemo(t.dataset.memo);
+  const a=t.dataset.act,id=t.dataset.id;
+  switch(a){
+    case "close":return closeSheet();
+    case "signOut":return signOut();
+    case "changePw":return openPwForm(false);
+    case "savePw":t.disabled=true;await savePw();t.disabled=false;return;
+    case "addPerson":return openPersonForm(null);
+    case "editPerson":return openPersonForm(id);
+    case "cancelEdit":return id?openProfile(id):closeSheet();
+    case "savePerson":t.disabled=true;await savePerson(id||null);t.disabled=false;return;
+    case "delPerson":
+      if(!can("deletePerson"))return;
+      if(t.dataset.armed){const p=byId(id);try{const r=await commit("Deleted personnel record",pLabel(p),[{col:"personnel",id,data:null,before:p}]);closeSheet();toast(r==="pending"?PENDING_MSG:"Record deleted");}catch(err){writeFail(err);}}
+      else{t.dataset.armed="1";t.textContent="Tap again to delete permanently";setTimeout(()=>{if(t.isConnected){delete t.dataset.armed;t.textContent="Delete";}},4000);}
+      return;
+    case "addLeave":return openLeaveForm(null,t.dataset.pid);
+    case "editLeave":return openLeaveForm(id);
+    case "saveLeave":t.disabled=true;await saveLeave(id||null);t.disabled=false;return;
+    case "delLeave":if(t.dataset.armed){const l=S.leave.find(x=>x.id===id);try{const r=await commit("Deleted leave record",l?`${l.type} leave for ${pLabel(byId(l.personnelId))}`:"",[{col:"leave",id,data:null,before:l}]);closeSheet();toast(r==="pending"?PENDING_MSG:"Leave record deleted");}catch(err){writeFail(err);}}else{t.dataset.armed="1";t.textContent="Tap again to delete";}return;
+    case "leaveStatus":{const l=S.leave.find(x=>x.id===id);const p=l&&byId(l.personnelId);if(l&&p&&can("approveLeave",p)){try{const r=await commit(t.dataset.s==="Approved"?"Approved leave":"Rejected leave",`${l.type} leave for ${pLabel(p)}, ${fmtD(l.start)} to ${fmtD(l.end)}`,[{col:"leave",id,data:{...l,status:t.dataset.s,decidedBy:S.me.id},before:l}]);toast(r==="pending"?PENDING_MSG:"Leave "+t.dataset.s.toLowerCase());}catch(err){writeFail(err);}}return;}
+    case "addTransfer":return openTransferForm(null,t.dataset.pid);
+    case "editTransfer":return openTransferForm(id);
+    case "saveTransfer":t.disabled=true;await saveTransfer(id||null);t.disabled=false;return;
+    case "delTransfer":if(t.dataset.armed){const x=S.transfers.find(y=>y.id===id);try{const r=await commit("Deleted transfer",x?`${pLabel(byId(x.personnelId))}: ${x.from} to ${x.to}`:"",[{col:"transfers",id,data:null,before:x}]);closeSheet();toast(r==="pending"?PENDING_MSG:"Transfer deleted");}catch(err){writeFail(err);}}else{t.dataset.armed="1";t.textContent="Tap again to delete";}return;
+    case "effect":{if(!can("effectTransfer"))return;const tr=S.transfers.find(x=>x.id===id);if(tr){try{const n={...tr,status:"Effected",effectiveDate:tr.effectiveDate||todayISO()};const ops=[{col:"transfers",id,data:n,before:tr}];const po=transferPersonOp(n);if(po)ops.push(po);const r=await commit("Effected transfer",`${pLabel(byId(tr.personnelId))}: ${tr.from||"—"} to ${tr.to}`,ops);toast(r==="pending"?PENDING_MSG:"Transfer effected and station updated");}catch(err){writeFail(err);}}return;}
+    case "saveLists":{if(!can("lists"))return;const g=k=>[...new Set($("#s_"+k).value.split("\n").map(s=>s.trim()).filter(Boolean))];const L={ranks:g("ranks"),stations:g("stations"),units:g("units")};if(!L.ranks.length||!L.stations.length){toast("Keep at least one rank and one station.");return;}try{const r=await commit("Updated drop-down lists","Ranks, stations and units",[{col:"settings",id:"lists",data:L,before:S.lists}]);toast(r==="pending"?PENDING_MSG:"Lists saved");}catch(err){writeFail(err);}return;}
+    case "clearExamples":{
+      if(!can("examples"))return;
+      if(!t.dataset.armed){t.dataset.armed="1";t.textContent="Confirm: remove examples";return;}
+      t.disabled=true;const ex=S.personnel.filter(p=>p.example).map(p=>p.id);const exSet=new Set(ex);
+      try{for(const l of S.leave.filter(l=>exSet.has(l.personnelId)))await remove("leave",l.id);
+        for(const r of S.transfers.filter(r=>exSet.has(r.personnelId)))await remove("transfers",r.id);
+        for(const pid of ex)await remove("personnel",pid);logAct("Removed example records",ex.length+" records");toast("Example records removed");}catch(err){writeFail(err);}
+      return;}
+    case "addUser":return openUserForm(null);
+    case "backup":{const d={exportedAt:new Date().toISOString(),personnel:S.personnel.map(({id,...x})=>({id,data:x})),leave:S.leave.map(({id,...x})=>({id,data:x})),transfers:S.transfers.map(({id,...x})=>({id,data:x})),lists:S.lists};
+      const b=new Blob([JSON.stringify(d,null,1)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=`UWR_register_backup_${todayISO()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);logAct("Downloaded backup","");return;}
+    case "restore":if(!isAdmin())return;return $("#jsonInput").click();
+    case "attach":S.attKey=t.dataset.key;return $("#attInput").click();
+    case "unattach":{const L=S.att[t.dataset.key]||[];L.splice(+t.dataset.i,1);const b=$("#att_"+t.dataset.key);if(b)b.innerHTML=attEdit(t.dataset.key);return;}
+    case "addDoc":return openDocForm(t.dataset.pid);
+    case "saveDoc":t.disabled=true;await saveDoc(t.dataset.pid);t.disabled=false;return;
+    case "rmDoc":{const p=byId(t.dataset.pid);if(!p||!can("editPerson",p))return;if(!t.dataset.armed){t.dataset.armed="1";t.textContent="Tap again";return;}
+      const d=(p.documents||[]).find(x=>x.id===id);try{const r=await commit("Removed document",`${d?d.cat+" ":""}from ${pLabel(p)}`,[{col:"personnel",id:p.id,data:{...p,documents:(p.documents||[]).filter(x=>x.id!==id)},before:p}]);toast(r==="pending"?PENDING_MSG:"Document removed");}catch(err){writeFail(err);}return;}
+    case "selfEdit":return openSelfForm();
+    case "saveSelf":t.disabled=true;await saveSelf();t.disabled=false;return;
+    case "newCase":return openCaseForm(t.dataset.pid);
+    case "saveCase":t.disabled=true;await saveCase();t.disabled=false;return;
+    case "caseFwd":t.disabled=true;await caseAction(id,"fwd");t.disabled=false;return;
+    case "caseNote":t.disabled=true;await caseAction(id,"note");t.disabled=false;return;
+    case "caseDone":t.disabled=true;await caseAction(id,"done");t.disabled=false;return;
+    case "caseDecline":t.disabled=true;await caseAction(id,"decline");t.disabled=false;return;
+    case "caseWithdraw":if(!t.dataset.armed){t.dataset.armed="1";t.textContent="Tap again to withdraw";return;}await caseAction(id,"withdraw");return;
+    case "caseToLeave":{const c=S.cases.find(x=>x.id===id);if(c){openLeaveForm(null,c.personnelId);const f=$("#lform");if(c.start)f.elements.start.value=c.start;if(c.end)f.elements.end.value=c.end;if(c.leaveType)f.elements.type.value=c.leaveType;f.elements.ref.value=c.ref;f.dispatchEvent(new Event("input"));}return;}
+    case "caseToTransfer":{const c=S.cases.find(x=>x.id===id);if(c){openTransferForm(null,c.personnelId);const f=$("#tform");if(c.prefStation)f.elements.to.value=c.prefStation;f.elements.ref.value=c.ref;}return;}
+    case "newMemo":return openMemoForm(null);
+    case "replyMemo":return openMemoForm(id);
+    case "rmRecip":S.memoTo.splice(+t.dataset.i,1);if(S.drawRecips)S.drawRecips();return;
+    case "sendMemo":t.disabled=true;await sendMemo(t.dataset.reply);t.disabled=false;return;
+    case "editUser":return openUserForm(id);
+    case "saveUser":t.disabled=true;await saveUser(id||null);t.disabled=false;return;
+    case "delUser":{const u=S.users.find(x=>x.id===id);if(!u)return;if(!can("users")||id===S.me.id||!manageable(u))return;
+      if(u.role==="admin"&&S.users.filter(x=>x.role==="admin"&&x.active!==false).length<=1){toast("Keep at least one active administrator.");return;}
+      if(!t.dataset.armed){t.dataset.armed="1";t.textContent="Tap again to delete";setTimeout(()=>{if(t.isConnected){delete t.dataset.armed;t.textContent=t.closest(".pane-foot")?"Delete user":"Delete";}},4000);return;}
+      try{const r=await commit("Deleted user",`${u.name} (${u.username})`,[{col:"profiles",id,username:u.username,data:null,before:u}]);if(S.sheet)closeSheet();toast(r==="pending"?PENDING_MSG:"User deleted. They can no longer sign in.");}catch(err){writeFail(err);}return;}
+    case "approveReq":t.disabled=true;await decideReq(id,true);return;
+    case "rejectReq":t.disabled=true;await decideReq(id,false);return;
+    case "withdrawReq":{const r=S.requests.find(x=>x.id===id);if(r&&r.by===S.me.id&&r.status==="pending"){try{const ops=(r.ops||[]).map(o=>{const c={...o};delete c.pw;return c;});await put("requests",id,{...r,ops,status:"withdrawn",decidedAt:new Date().toISOString()});toast("Request withdrawn");}catch(err){writeFail(err);}}return;}
+    case "pruneReq":{if(!isAdmin())return;if(!t.dataset.armed){t.dataset.armed="1";t.textContent="Tap again to clear";return;}
+      const cut=new Date(Date.now()-60*864e5).toISOString();const old=S.requests.filter(r=>r.status!=="pending"&&(r.decidedAt||r.createdAt)<cut);
+      try{for(const r of old)await remove("requests",r.id);logAct("Cleared old requests",old.length+" requests");toast("Cleared "+old.length+" old requests");}catch(err){writeFail(err);}return;}
+    case "loadAudit":return loadAudit();
+    case "import":return openImport();
+    case "pickCSV":return $("#csvInput").click();
+    case "runImport":return runImport(t);
+    case "template":return saveFile("UWR_nominal_roll_template.csv",toCSV([]));
+    case "export":{const rows=filtered();logAct("Exported nominal roll",rows.length+" records");return saveFile(`UWR_nominal_roll_${todayISO()}.csv`,toCSV(rows));}
+    case "copyCSV":{const ta=$("#csvText");try{await navigator.clipboard.writeText(ta.value);toast("Copied");}catch(err){ta.focus();ta.select();toast("Text selected. Press copy on your keyboard.");}return;}
+    case "pickPhoto":return $("#photoInput").click();
+  }
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&S.sheet)closeSheet();
+  if(e.key==="Enter"&&e.target.matches("tr[data-open]"))openProfile(e.target.dataset.open);
+});
+document.addEventListener("input",e=>{
+  if(e.target.id==="q"){S.f.q=e.target.value;updatePeople();return;}
+  const pk=e.target.dataset&&e.target.dataset.pick;
+  if(pk){const form=e.target.closest("form");const h=form&&form.querySelector(`input[type=hidden][name="${pk}"]`);const list=[...form.querySelectorAll("#dl_"+e.target.id+" option")].map(o=>o.value);
+    const p=resolvePerson(e.target.value,S.personnel.filter(x=>list.includes(personKey(x))));
+    if(h){const old=h.value;h.value=p?p.id:"";if(old!==h.value)h.dispatchEvent(new Event("change",{bubbles:true}));}
+    const hint=document.getElementById(e.target.id+"_hint");if(hint)hint.textContent=p?"Selected: "+pLabel(p):(e.target.value?"No single match yet. Keep typing or pick from the suggestions.":"Pick a name from the suggestions.");
+    if(p&&e.target.id==="u_pl"){const n=$("#u_name");if(n&&!n.value)n.value=(p.rank?p.rank+" ":"")+shortName(p);}
+  }
+});
+document.addEventListener("change",e=>{
+  if(e.target.id==="auditUser")return renderAudit();
+  const m={fStation:"station",fRank:"rank",fStatus:"status",fGender:"gender",fSort:"sort"}[e.target.id];
+  if(m){S.f[m]=e.target.value;updatePeople();}
+});
+$("#attInput").addEventListener("change",e=>{const fs=[...e.target.files];e.target.value="";if(fs.length&&S.attKey&&canUpload())uploadFiles(S.attKey,fs);});
+new MutationObserver(()=>{clearTimeout(S.hyT);S.hyT=setTimeout(hydrate,30);}).observe(document.body,{childList:true,subtree:true});
+document.addEventListener("click",e=>{const a=e.target.closest("a[data-path]");if(a&&!a.dataset.ok){e.preventDefault();hydrate().then(()=>{if(a.dataset.ok)window.open(a.href,"_blank","noopener");});}},true);
+$("#jsonInput").addEventListener("change",async e=>{
+  const f=e.target.files[0];e.target.value="";if(!f||!isAdmin())return;const prog=$("#restoreProg");
+  try{const d=JSON.parse(await f.text());let n=0;
+    for(const t of ["personnel","leave","transfers"]){const rows=(d[t]||[]).map(r=>({id:String(r.id),data:r.data||{}}));for(let i=0;i<rows.length;i+=200){chk(await sb.from(t).upsert(rows.slice(i,i+200)));n+=Math.min(200,rows.length-i);if(prog)prog.textContent=`Restored ${n} records…`;}}
+    if(d.lists&&d.lists.ranks)await saveLists(d.lists);
+    await loadAll();logAct("Restored backup",`${n} records from ${f.name}`);toast(`Restored ${n} records`);if(prog)prog.textContent=`Restored ${n} records.`;renderAll();
+  }catch(x){toast("That backup file could not be read: "+(x.message||x));}
+});
+$("#csvInput").addEventListener("change",e=>{const f=e.target.files[0];e.target.value="";if(f)handleCSV(f);});
+$("#photoInput").addEventListener("change",async e=>{
+  const f=e.target.files[0];e.target.value="";if(!f||!canUpload())return;
+  if(f.size>5*1024*1024){toast("Choose a photo under 5 MB.");return;}
+  const prev=$("#photoPrev");if(prev)prev.innerHTML=`<span class="av lg">…</span>`;
+  try{const path=await uploadOne(f);S.formPhoto=path;if($("#photoPrev"))$("#photoPrev").innerHTML=`<span class="av lg"><img data-path="${esc(path)}" alt=""></span>`;toast("Photo added. Save the record to keep it.");}
+  catch(err){toast("Photo upload failed. Try a smaller JPEG.");if($("#photoPrev"))$("#photoPrev").innerHTML=`<span class="av lg">!</span>`;}
+});
+/* session expiry check */
+setInterval(()=>{if(!S.me)return;let at=0;try{at=+localStorage.getItem("uwr.loginAt")||0;}catch(e){}if(at&&Date.now()-at>SESSION_HOURS*3600e3)signOut("Your session ended. Sign in again.");},60000);
+
+/* ---------- boot ---------- */
+showGate();
+(async()=>{
+  if(CFG.url.startsWith("__")||typeof supabase==="undefined"){S.cfgMissing=true;showGate();return;}
+  sb=supabase.createClient(CFG.url,CFG.key,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"uwr-auth"}});S.db=sb;
+  const r=await sb.rpc("setup_needed");
+  if(r.error){S.gateMsg="Cannot reach the database. Check your internet connection and reload the page.";showGate();return;}
+  S.setupNeeded=!!r.data;
+  if(!S.setupNeeded&&await resumeSession())return;
+  showGate();
+})();
+})();
+
+</script>
+</body>
+</html>
